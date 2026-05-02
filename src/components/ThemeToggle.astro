@@ -1,0 +1,60 @@
+---
+// Light/dark/system theme toggle. Persists to localStorage and updates instantly.
+---
+
+<button
+  type="button"
+  data-theme-toggle
+  class="inline-flex items-center justify-center size-9 rounded-full border border-[color:var(--color-border)] bg-[color:var(--color-surface)] hover:border-[color:var(--color-accent)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-accent)] transition"
+  aria-label="Toggle theme"
+  title="Toggle theme"
+>
+  <svg data-theme-icon="light" viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4" />
+  </svg>
+  <svg data-theme-icon="dark" viewBox="0 0 24 24" class="size-4 hidden" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+    <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+  </svg>
+</button>
+
+<script>
+  const KEY = 'appland-theme';
+
+  function effectiveTheme(): 'light' | 'dark' {
+    return document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+  }
+
+  function syncIcons() {
+    const t = effectiveTheme();
+    for (const el of document.querySelectorAll<HTMLElement>('[data-theme-icon]')) {
+      const which = el.getAttribute('data-theme-icon');
+      el.classList.toggle('hidden', which === t);
+    }
+  }
+
+  function setTheme(t: 'light' | 'dark') {
+    document.documentElement.setAttribute('data-theme', t);
+    try { localStorage.setItem(KEY, t); } catch {}
+    syncIcons();
+  }
+
+  syncIcons();
+
+  for (const btn of document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]')) {
+    btn.addEventListener('click', () => {
+      setTheme(effectiveTheme() === 'dark' ? 'light' : 'dark');
+    });
+  }
+
+  // Track OS changes for users who never explicitly toggled.
+  try {
+    const mql = window.matchMedia('(prefers-color-scheme: dark)');
+    mql.addEventListener('change', (e) => {
+      if (!localStorage.getItem(KEY)) {
+        document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+        syncIcons();
+      }
+    });
+  } catch {}
+</script>

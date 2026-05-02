@@ -1,0 +1,39 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Layout from '../../layouts/Layout.astro';
+import LandingPage from '../../components/LandingPage.astro';
+import { loadSite } from '../../lib/data.ts';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const { appView } = await loadSite();
+  // Generate a route for every locale, including the default — this gives
+  // /en-US/ as well as the bare / route, which is the requested behaviour.
+  return appView.locales.map((l) => ({
+    params: { locale: l.code },
+  }));
+};
+
+const { locale: localeParam } = Astro.params;
+const { site, appView } = await loadSite();
+const locale = appView.locales.find((l) => l.code === localeParam);
+if (!locale) {
+  // Should be unreachable because getStaticPaths constrains the values.
+  throw new Error(`Unknown locale: ${localeParam}`);
+}
+
+const hero = appView.hero(locale.code);
+const pageTitle = hero.subtitle
+  ? `${hero.title} – ${hero.subtitle}`
+  : hero.title;
+const pageDescription = hero.subtitle || (hero.description.split('\n')[0] ?? site.title);
+---
+
+<Layout
+  site={site}
+  appView={appView}
+  locale={locale}
+  pageTitle={pageTitle}
+  pageDescription={pageDescription}
+>
+  <LandingPage site={site} appView={appView} locale={locale} />
+</Layout>

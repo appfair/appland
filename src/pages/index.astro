@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LandingPage from '../components/LandingPage.astro';
+import { loadSite } from '../lib/data.ts';
+
+const { site, appView } = await loadSite();
+const locale = appView.locales.find((l) => l.code === appView.defaultLocale) ?? appView.locales[0]!;
+
+const hero = appView.hero(locale.code);
+const pageTitle = hero.subtitle
+  ? `${hero.title} – ${hero.subtitle}`
+  : hero.title;
+const pageDescription = hero.subtitle || (hero.description.split('\n')[0] ?? site.title);
+---
+
+<Layout
+  site={site}
+  appView={appView}
+  locale={locale}
+  pageTitle={pageTitle}
+  pageDescription={pageDescription}
+  autoRedirect
+>
+  <LandingPage site={site} appView={appView} locale={locale} />
+</Layout>

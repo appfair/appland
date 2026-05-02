@@ -1,0 +1,109 @@
+@import 'tailwindcss';
+
+/* Theme tokens — light is the default; dark variants are gated by [data-theme="dark"]. */
+@theme {
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, 'Noto Sans', sans-serif;
+  --font-display: var(--font-sans);
+  --color-bg: oklch(99% 0 0);
+  --color-surface: oklch(100% 0 0);
+  --color-surface-2: oklch(97% 0 0);
+  --color-text: oklch(20% 0 0);
+  --color-text-soft: oklch(40% 0 0);
+  --color-text-muted: oklch(55% 0 0);
+  --color-border: oklch(90% 0 0);
+  --color-border-soft: oklch(94% 0 0);
+  --color-accent: var(--accent, #3B82F6);
+  --color-accent-soft: color-mix(in oklch, var(--color-accent) 14%, transparent);
+  --color-accent-fg: oklch(99% 0 0);
+}
+
+/* Dark theme overrides. Astro renders [data-theme="dark"] on <html>. */
+:root[data-theme='dark'] {
+  --color-bg: oklch(13% 0.01 250);
+  --color-surface: oklch(17% 0.01 250);
+  --color-surface-2: oklch(20% 0.012 250);
+  --color-text: oklch(96% 0 0);
+  --color-text-soft: oklch(80% 0 0);
+  --color-text-muted: oklch(65% 0 0);
+  --color-border: oklch(28% 0.01 250);
+  --color-border-soft: oklch(22% 0.01 250);
+  --color-accent-soft: color-mix(in oklch, var(--color-accent) 24%, transparent);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --color-bg: oklch(13% 0.01 250);
+    --color-surface: oklch(17% 0.01 250);
+    --color-surface-2: oklch(20% 0.012 250);
+    --color-text: oklch(96% 0 0);
+    --color-text-soft: oklch(80% 0 0);
+    --color-text-muted: oklch(65% 0 0);
+    --color-border: oklch(28% 0.01 250);
+    --color-border-soft: oklch(22% 0.01 250);
+    --color-accent-soft: color-mix(in oklch, var(--color-accent) 24%, transparent);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background:
+    radial-gradient(
+      1200px 600px at 80% -10%,
+      var(--color-accent-soft),
+      transparent 60%
+    ),
+    radial-gradient(
+      1000px 500px at -10% 10%,
+      color-mix(in oklch, var(--color-accent) 8%, transparent),
+      transparent 65%
+    );
+  background-attachment: fixed;
+  min-height: 100dvh;
+}
+
+/* Carousel-specific styles ---------------------------------------------------*/
+.carousel {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.carousel::-webkit-scrollbar { display: none; }
+.carousel > * { scroll-snap-align: center; }
+
+/* Subtle entrance animation for cards. */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.rise {
+  animation: rise 600ms ease-out both;
+}
+
+/* Long descriptions: preserve the original line breaks/bullets. */
+.prose-app {
+  white-space: pre-wrap;
+  line-height: 1.7;
+  color: var(--color-text-soft);
+}
+.prose-app a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Detail/summary disclosure look. */
+details > summary {
+  cursor: pointer;
+  list-style: none;
+}
+details > summary::-webkit-details-marker { display: none; }

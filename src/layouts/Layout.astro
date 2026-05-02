@@ -1,0 +1,185 @@
+---
+import '../styles/global.css';
+import type { AppView, LocaleInfo, SiteInfo } from '../lib/types.ts';
+import LanguagePicker from '../components/LanguagePicker.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  site: SiteInfo;
+  appView: AppView;
+  locale: LocaleInfo;
+  pageTitle: string;
+  pageDescription: string;
+  /**
+   * If true, emit an inline script that reads `navigator.languages` and
+   * redirects to the matching `/{locale}/` page. Only the bare `/` route
+   * sets this to true; localized pages stay put so users can opt out of
+   * auto-detection by navigating to /<their-locale>/ explicitly.
+   */
+  autoRedirect?: boolean;
+}
+
+const { site, appView, locale, pageTitle, pageDescription, autoRedirect = false } =
+  Astro.props;
+
+const canonical = new URL(locale.href, site.host).toString();
+const ogImage = appView.socialImage;
+const accent = site.accentColor ?? '#3B82F6';
+
+// Map our locale codes to BCP-47 hreflang values for SEO.
+const alternates = appView.locales.map((l) => ({
+  hrefLang: l.code,
+  href: new URL(l.href, site.host).toString(),
+}));
+
+// Payload for the auto-redirect script. Computed once per build, embedded
+// in JSON so the inline script stays small and parser-friendly.
+const localeCodes = appView.locales.map((l) => l.code);
+const redirectPayload = JSON.stringify({
+  locales: localeCodes,
+  defaultLocale: appView.defaultLocale,
+});
+---
+
+<!doctype html>
+<html
+  lang={locale.code}
+  dir={locale.rtl ? 'rtl' : 'ltr'}
+  data-default-theme={site.defaultTheme ?? 'system'}
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content={accent} />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <link rel="canonical" href={canonical} />
+
+    {appView.favicons && (
+      <>
+        <link rel="icon" type="image/png" href={appView.favicons.icon} />
+        <link rel="apple-touch-icon" href={appView.favicons.appleTouchIcon} />
+        <link rel="icon" sizes="192x192" href={appView.favicons.pwaIcon192} />
+        <link rel="icon" sizes="512x512" href={appView.favicons.pwaIcon512} />
+      </>
+    )}
+
+    {alternates.map((a) => (
+      <link rel="alternate" hreflang={a.hrefLang} href={a.href} />
+    ))}
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href={new URL('/', site.host).toString()}
+    />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonical} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
+
+    <style is:global define:vars={{ accent }}>
+      :root { --accent: var(--accent); }
+    </style>
+
+    {site.analyticsScript && (
+      <script
+        is:inline
+        defer
+        src={site.analyticsScript}
+        data-domain={site.analyticsDomain}
+      ></script>
+    )}
+
+    {/*
+      Auto-detect-and-redirect script for the bare / page. Runs synchronously
+      before paint so users land on their preferred locale without a flash of
+      English content. The matching algorithm walks `navigator.languages` in
+      preference order, comparing each entry to the site's available locales:
+      first by exact match (case-insensitive), then by language-only match
+      ("de-AT" → "de", "zh-CN" → "zh-Hans" via the language prefix). If no
+      browser preference matches, no redirect happens; the user keeps the
+      default-locale content already rendered on /.
+    */}
+    {autoRedirect && (
+      <script is:inline set:html={`
+        (function () {
+          try {
+            var cfg = ${redirectPayload};
+            var locales = cfg.locales || [];
+            var nav = (typeof navigator !== 'undefined' && navigator) || {};
+            var prefs = nav.languages && nav.languages.length
+              ? nav.languages
+              : [nav.language || ''];
+            function pick(b) {
+              if (!b) return null;
+              var lc = String(b).toLowerCase();
+              for (var i = 0; i < locales.length; i++) {
+                if (String(locales[i]).toLowerCase() === lc) return locales[i];
+              }
+              var lang = lc.split('-')[0];
+              for (var j = 0; j < locales.length; j++) {
+                if (String(locales[j]).toLowerCase().split('-')[0] === lang) {
+                  return locales[j];
+                }
+              }
+              return null;
+            }
+            var target = null;
+            for (var k = 0; k < prefs.length && !target; k++) {
+              target = pick(prefs[k]);
+            }
+            if (target) {
+              var loc = window.location;
+              loc.replace('/' + target + '/' + (loc.search || '') + (loc.hash || ''));
+            }
+          } catch (_) { /* never block rendering */ }
+        })();
+      `} />
+    )}
+
+    {/* Set theme before paint to avoid a flash. */}
+    <script is:inline>
+      (function () {
+        try {
+          var key = 'appland-theme';
+          var saved = localStorage.getItem(key);
+          var def = document.documentElement.getAttribute('data-default-theme') || 'system';
+          var theme = saved || def;
+          if (theme === 'system') {
+            var mql = window.matchMedia('(prefers-color-scheme: dark)');
+            theme = mql.matches ? 'dark' : 'light';
+          }
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body class="min-h-dvh text-[color:var(--color-text)]">
+    <header
+      class="sticky top-0 z-30 backdrop-blur-md bg-[color:var(--color-bg)]/70 border-b border-[color:var(--color-border-soft)]"
+    >
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 py-3 flex items-center gap-3">
+        <a
+          href={locale.href}
+          class="font-semibold tracking-tight text-base sm:text-lg shrink-0"
+        >{site.title}</a>
+        <div class="flex-1"></div>
+        <LanguagePicker locales={appView.locales} current={locale} />
+        <ThemeToggle />
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-4 sm:px-6 py-8 sm:py-12">
+      <slot />
+    </main>
+
+    <Footer site={site} appView={appView} locale={locale} />
+  </body>
+</html>

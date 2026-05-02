@@ -1,0 +1,79 @@
+---
+import type { PlatformView } from '../lib/types.ts';
+import { loadPermissionIcon } from '../lib/svg-icons.ts';
+
+interface Props {
+  view: PlatformView;
+  i18n: { heading: string; whyHeading: string; rawKeyLabel: string; emptyText: string };
+}
+
+const { view, i18n } = Astro.props;
+const { permissions } = view;
+
+// Resolve every icon SVG once at build time and pair it with its permission.
+const iconSvgs = await Promise.all(
+  permissions.map((p) => loadPermissionIcon(p.icon)),
+);
+const items = permissions.map((p, i) => ({ permission: p, svg: iconSvgs[i]! }));
+---
+
+<section class="space-y-4">
+  <header class="flex items-end justify-between gap-4">
+    <h2 class="text-xl sm:text-2xl font-semibold tracking-tight">{i18n.heading}</h2>
+    <p class="text-xs uppercase tracking-wider text-[color:var(--color-text-muted)]">{view.displayName}</p>
+  </header>
+
+  {permissions.length === 0 ? (
+    <p class="text-[color:var(--color-text-muted)]">{i18n.emptyText}</p>
+  ) : (
+    <ul class="grid gap-3 sm:grid-cols-2">
+      {items.map(({ permission: p, svg }) => (
+        <li class="rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4 sm:p-5 hover:border-[color:var(--color-accent)] transition">
+          <div class="flex items-start gap-3.5">
+            <div
+              class:list={[
+                'shrink-0 flex items-center justify-center size-11 rounded-xl',
+                p.sensitivity === 'high'
+                  ? 'bg-rose-500/10 text-rose-700 dark:text-rose-300'
+                  : p.sensitivity === 'medium'
+                    ? 'bg-amber-500/10 text-amber-700 dark:text-amber-300'
+                    : 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300',
+              ]}
+            >
+              <span class="size-6 [&>svg]:size-full block" set:html={svg}></span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between gap-2">
+                <h3 class="font-semibold">{p.label}</h3>
+                <span
+                  class:list={[
+                    'rounded-full text-[10px] uppercase tracking-wider px-2 py-0.5 font-medium shrink-0',
+                    p.sensitivity === 'high'
+                      ? 'bg-rose-500/15 text-rose-700 dark:text-rose-300'
+                      : p.sensitivity === 'medium'
+                        ? 'bg-amber-500/15 text-amber-700 dark:text-amber-300'
+                        : 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-300',
+                  ]}
+                >
+                  {p.sensitivity}
+                </span>
+              </div>
+              {p.description ? (
+                <p class="mt-1.5 text-sm text-[color:var(--color-text-soft)] leading-relaxed">
+                  {p.description}
+                </p>
+              ) : (
+                <p class="mt-1.5 text-sm text-[color:var(--color-text-muted)] italic">
+                  {i18n.whyHeading}
+                </p>
+              )}
+              <p class="mt-2 text-[11px] font-mono text-[color:var(--color-text-muted)] break-all">
+                {i18n.rawKeyLabel}: {p.key}
+              </p>
+            </div>
+          </div>
+        </li>
+      ))}
+    </ul>
+  )}
+</section>

@@ -1,0 +1,157 @@
+---
+import type { PlatformView } from '../lib/types.ts';
+
+interface Props {
+  view: PlatformView;
+}
+
+const { view } = Astro.props;
+const shots = view.screenshots;
+---
+
+{shots.length > 0 && (
+  <section class="space-y-4">
+    <header class="flex items-end justify-between gap-4">
+      <h2 class="text-xl sm:text-2xl font-semibold tracking-tight">Screenshots</h2>
+      <p class="text-xs uppercase tracking-wider text-[color:var(--color-text-muted)]">
+        {view.displayName}
+      </p>
+    </header>
+
+    <div
+      class="relative -mx-4 sm:mx-0 group"
+      data-carousel-root
+    >
+      <div
+        class="carousel flex gap-4 sm:gap-6 overflow-x-auto px-4 sm:px-0 pb-4"
+        data-carousel-track
+        tabindex="0"
+        aria-label={`${view.displayName} screenshots`}
+      >
+        {shots.map((s, i) => (
+          <figure
+            class="shrink-0 w-[68%] sm:w-[42%] md:w-[28%] lg:w-[22%]"
+            data-carousel-item
+            data-index={i}
+          >
+            <div class="relative aspect-[9/19.5] rounded-3xl overflow-hidden bg-[color:var(--color-surface-2)] ring-1 ring-[color:var(--color-border)] shadow-xl">
+              <img
+                src={s.url}
+                alt={s.alt}
+                width={s.width}
+                height={s.height}
+                loading={i < 2 ? 'eager' : 'lazy'}
+                decoding="async"
+                class="absolute inset-0 size-full object-cover"
+              />
+            </div>
+          </figure>
+        ))}
+      </div>
+
+      {shots.length > 1 && (
+        <>
+          <button
+            type="button"
+            data-carousel-prev
+            aria-label="Previous screenshot"
+            class="hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 size-10 items-center justify-center rounded-full border border-[color:var(--color-border)] bg-[color:var(--color-surface)]/95 backdrop-blur shadow-lg opacity-0 group-hover:opacity-100 transition focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-accent)]"
+          >
+            <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="m15 6-6 6 6 6" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            data-carousel-next
+            aria-label="Next screenshot"
+            class="hidden sm:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 size-10 items-center justify-center rounded-full border border-[color:var(--color-border)] bg-[color:var(--color-surface)]/95 backdrop-blur shadow-lg opacity-0 group-hover:opacity-100 transition focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-accent)]"
+          >
+            <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="m9 6 6 6-6 6" />
+            </svg>
+          </button>
+
+          <div
+            class="mt-1 flex justify-center gap-1.5"
+            data-carousel-dots
+            aria-hidden="true"
+          >
+            {shots.map((_, i) => (
+              <span
+                class="size-1.5 rounded-full bg-[color:var(--color-border)] transition-all aria-current:bg-[color:var(--color-accent)] aria-current:w-4"
+                data-dot
+                data-index={i}
+                aria-current={i === 0 ? 'true' : 'false'}
+              ></span>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  </section>
+)}
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-carousel-root]')) {
+    const track = root.querySelector<HTMLElement>('[data-carousel-track]');
+    if (!track) continue;
+    const items = Array.from(root.querySelectorAll<HTMLElement>('[data-carousel-item]'));
+    const dots = Array.from(root.querySelectorAll<HTMLElement>('[data-dot]'));
+    const prev = root.querySelector<HTMLButtonElement>('[data-carousel-prev]');
+    const next = root.querySelector<HTMLButtonElement>('[data-carousel-next]');
+    if (!items.length) continue;
+
+    const scrollToIndex = (i: number) => {
+      const target = items[Math.max(0, Math.min(items.length - 1, i))];
+      if (!target) return;
+      const offsetLeft = target.offsetLeft;
+      const targetCenter = offsetLeft + target.offsetWidth / 2;
+      const trackCenter = track.clientWidth / 2;
+      track.scrollTo({ left: targetCenter - trackCenter, behavior: 'smooth' });
+    };
+
+    const currentIndex = (): number => {
+      const center = track.scrollLeft + track.clientWidth / 2;
+      let best = 0;
+      let bestDist = Infinity;
+      items.forEach((it, i) => {
+        const c = it.offsetLeft + it.offsetWidth / 2;
+        const d = Math.abs(c - center);
+        if (d < bestDist) {
+          bestDist = d;
+          best = i;
+        }
+      });
+      return best;
+    };
+
+    const updateDots = () => {
+      const idx = currentIndex();
+      dots.forEach((d, i) =>
+        d.setAttribute('aria-current', i === idx ? 'true' : 'false'),
+      );
+    };
+
+    prev?.addEventListener('click', () => scrollToIndex(currentIndex() - 1));
+    next?.addEventListener('click', () => scrollToIndex(currentIndex() + 1));
+
+    dots.forEach((d, i) => d.addEventListener('click', () => scrollToIndex(i)));
+
+    track.addEventListener('scroll', () => {
+      window.requestAnimationFrame(updateDots);
+    });
+
+    track.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        scrollToIndex(currentIndex() - 1);
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        scrollToIndex(currentIndex() + 1);
+      }
+    });
+
+    updateDots();
+  }
+</script>

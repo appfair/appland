@@ -1,0 +1,69 @@
+---
+import type { LocaleInfo } from '../lib/types.ts';
+
+interface Props {
+  locales: LocaleInfo[];
+  current: LocaleInfo;
+}
+
+const { locales, current } = Astro.props;
+---
+
+<details class="relative" data-language-picker>
+  <summary
+    class="inline-flex items-center gap-1.5 rounded-full border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-1.5 text-sm font-medium hover:border-[color:var(--color-accent)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-accent)] transition"
+    aria-label="Select language"
+  >
+    <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" />
+    </svg>
+    <span class="hidden sm:inline">{current.nativeName}</span>
+    <span class="sm:hidden uppercase">{current.code.split('-')[0]}</span>
+    <svg viewBox="0 0 24 24" class="size-3 opacity-60" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  </summary>
+  <div
+    class="absolute end-0 mt-2 w-64 max-h-[70vh] overflow-auto rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-surface)] shadow-2xl p-1 z-40"
+    role="listbox"
+  >
+    {locales.map((l) => (
+      <a
+        href={l.href}
+        lang={l.code}
+        class:list={[
+          'flex items-baseline justify-between gap-3 rounded-xl px-3 py-2 text-sm hover:bg-[color:var(--color-surface-2)] transition',
+          l.code === current.code ? 'bg-[color:var(--color-surface-2)] font-semibold' : '',
+        ]}
+        aria-current={l.code === current.code ? 'true' : 'false'}
+      >
+        {/*
+          The native-name span gets `dir="auto"` so its own Unicode bidi
+          handles the Arabic / Hebrew glyph order without flipping the
+          flex layout of the row itself. The row inherits the document's
+          direction, so every code chip stays in the same column whether
+          the script is LTR (English, Japanese, etc.) or RTL (Arabic).
+        */}
+        <span dir="auto">{l.nativeName}</span>
+        <span class="text-xs text-[color:var(--color-text-muted)] uppercase tracking-wide">{l.code}</span>
+      </a>
+    ))}
+  </div>
+</details>
+
+<script>
+  // Close the language picker on outside click or Escape, and on selection.
+  for (const root of document.querySelectorAll<HTMLDetailsElement>('[data-language-picker]')) {
+    document.addEventListener('click', (e) => {
+      if (!root.contains(e.target as Node)) root.open = false;
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') root.open = false;
+    });
+    root.addEventListener('click', (e) => {
+      const a = (e.target as HTMLElement).closest('a');
+      if (a) root.open = false;
+    });
+  }
+</script>

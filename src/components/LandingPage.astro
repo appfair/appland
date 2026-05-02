@@ -1,0 +1,84 @@
+---
+import type { AppView, LocaleInfo, PlatformView, SiteInfo } from '../lib/types.ts';
+import { uiStrings } from '../lib/uistrings.ts';
+
+import Hero from './Hero.astro';
+import PlatformPicker from './PlatformPicker.astro';
+import ScreenshotCarousel from './ScreenshotCarousel.astro';
+import DescriptionBlock from './DescriptionBlock.astro';
+import PermissionsList from './PermissionsList.astro';
+import AboutCard from './AboutCard.astro';
+
+interface Props {
+  site: SiteInfo;
+  appView: AppView;
+  locale: LocaleInfo;
+}
+
+const { site, appView, locale } = Astro.props;
+const ui = uiStrings(locale.code);
+
+const hero = appView.hero(locale.code);
+const views: Partial<Record<'ios' | 'android', PlatformView | null>> = {
+  ios: appView.platforms.includes('ios') ? appView.view(locale.code, 'ios') : null,
+  android: appView.platforms.includes('android') ? appView.view(locale.code, 'android') : null,
+};
+---
+
+<div class="space-y-12 sm:space-y-16">
+  <Hero hero={hero} views={views} site={site} />
+
+  {appView.platforms.length > 1 && (
+    <div class="flex justify-center">
+      <PlatformPicker
+        platforms={appView.platforms}
+        defaultPlatform={(site.defaultPlatform ?? 'ios') as 'ios' | 'android'}
+        views={views}
+      />
+    </div>
+  )}
+
+  {(['ios', 'android'] as const).map((p) =>
+    views[p] ? (
+      <div data-platform-section={p} class="space-y-12 sm:space-y-16">
+        <ScreenshotCarousel view={views[p]!} />
+
+        <div class="grid gap-8 lg:gap-12 lg:grid-cols-[1fr_320px] items-start">
+          <DescriptionBlock
+            view={views[p]!}
+            i18n={{
+              aboutHeading: ui.about,
+              releaseNotesHeading: ui.releaseNotes,
+            }}
+          />
+          <AboutCard
+            view={views[p]!}
+            site={site}
+            i18n={{
+              aboutHeading: ui.about,
+              versionLabel: ui.versionLabel,
+              buildLabel: ui.buildLabel,
+              bundleIdLabel: ui.bundleIdLabel,
+              appIdLabel: ui.appIdLabel,
+              privacyLink: ui.privacyLink,
+              supportLink: ui.supportLink,
+              dependenciesLabel: ui.dependenciesLabel,
+            }}
+          />
+        </div>
+
+        {site.showPermissions !== false && (
+          <PermissionsList
+            view={views[p]!}
+            i18n={{
+              heading: ui.permissions,
+              whyHeading: ui.whyNoDescription,
+              rawKeyLabel: ui.rawKeyLabel,
+              emptyText: ui.noPermissions,
+            }}
+          />
+        )}
+      </div>
+    ) : null,
+  )}
+</div>

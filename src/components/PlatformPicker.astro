@@ -1,0 +1,86 @@
+---
+import type { PlatformView } from '../lib/types.ts';
+
+interface Props {
+  platforms: ('ios' | 'android')[];
+  defaultPlatform: 'ios' | 'android';
+  views: Partial<Record<'ios' | 'android', PlatformView | null>>;
+}
+
+const { platforms, defaultPlatform, views } = Astro.props;
+const initial =
+  platforms.includes(defaultPlatform) && views[defaultPlatform]
+    ? defaultPlatform
+    : (platforms.find((p) => views[p]) ?? defaultPlatform);
+---
+
+{platforms.length > 1 && (
+  <div
+    class="inline-flex rounded-full border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-1 text-sm font-medium shadow-sm"
+    role="tablist"
+    aria-label="Choose platform"
+    data-platform-picker
+    data-initial={initial}
+  >
+    {platforms.map((p) => (
+      <button
+        type="button"
+        role="tab"
+        aria-selected={p === initial ? 'true' : 'false'}
+        data-platform-tab={p}
+        class="inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 transition aria-selected:bg-[color:var(--color-accent)] aria-selected:text-[color:var(--color-accent-fg)] aria-selected:shadow text-[color:var(--color-text-soft)] hover:text-[color:var(--color-text)]"
+      >
+        {p === 'ios' ? (
+          <svg viewBox="0 0 24 24" class="size-4" fill="currentColor" aria-hidden="true">
+            <path d="M16.5 12.3c0-2 1.6-3 1.7-3-.9-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.7-1.3 0-2.6.8-3.3 2-1.4 2.4-.4 6 1 8 .7 1 1.5 2 2.6 2 1 0 1.4-.6 2.7-.6s1.6.6 2.7.6c1.1 0 1.8-1 2.5-2 .8-1.1 1.1-2.2 1.1-2.3-.1 0-2.1-.8-2.1-3.1zM14.6 5.7c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.5 1.3-.5.6-1 1.7-.9 2.6 1 .1 2-.5 2.5-1.2z"/>
+          </svg>
+        ) : (
+          <svg viewBox="0 0 24 24" class="size-4" fill="currentColor" aria-hidden="true">
+            <path d="M16.6 9.5 18 7l-1.7-1L15 8.4a8 8 0 0 0-6 0L7.7 6 6 7l1.4 2.5A6.2 6.2 0 0 0 5 15h14a6.2 6.2 0 0 0-2.4-5.5zM9 13a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm6 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2zM5 16h14v3a1 1 0 0 1-1 1h-1v3h-2v-3h-6v3H7v-3H6a1 1 0 0 1-1-1v-3z"/>
+          </svg>
+        )}
+        {p === 'ios' ? 'iPhone' : 'Android'}
+      </button>
+    ))}
+  </div>
+)}
+
+<script>
+  const KEY = 'appland-platform';
+
+  function applyPlatform(picker: HTMLElement, p: string) {
+    for (const tab of picker.querySelectorAll<HTMLElement>('[data-platform-tab]')) {
+      tab.setAttribute('aria-selected', tab.dataset.platformTab === p ? 'true' : 'false');
+    }
+    for (const section of document.querySelectorAll<HTMLElement>('[data-platform-section]')) {
+      const wants = section.dataset.platformSection;
+      section.classList.toggle('hidden', wants !== p);
+    }
+    try { localStorage.setItem(KEY, p); } catch {}
+  }
+
+  for (const picker of document.querySelectorAll<HTMLElement>('[data-platform-picker]')) {
+    let initial = picker.dataset.initial || 'ios';
+    try {
+      const saved = localStorage.getItem(KEY);
+      if (saved && picker.querySelector(`[data-platform-tab="${saved}"]`)) {
+        initial = saved;
+      }
+    } catch {}
+    applyPlatform(picker, initial);
+
+    picker.addEventListener('click', (e) => {
+      const tab = (e.target as HTMLElement).closest<HTMLElement>('[data-platform-tab]');
+      if (!tab) return;
+      const p = tab.dataset.platformTab!;
+      applyPlatform(picker, p);
+    });
+  }
+
+  // For documents with platform-only sections but no picker (single-platform apps),
+  // ensure the only section is shown.
+  if (!document.querySelector('[data-platform-picker]')) {
+    const sections = document.querySelectorAll<HTMLElement>('[data-platform-section]');
+    sections.forEach((s) => s.classList.remove('hidden'));
+  }
+</script>

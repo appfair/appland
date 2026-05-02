@@ -1,0 +1,45 @@
+---
+import type { HeroView, PlatformView, SiteInfo } from '../lib/types.ts';
+import StoreBadges from './StoreBadges.astro';
+
+interface Props {
+  hero: HeroView;
+  views: Partial<Record<'ios' | 'android', PlatformView | null>>;
+  site: SiteInfo;
+}
+
+const { hero, views, site } = Astro.props;
+---
+
+<section class="relative">
+  {hero.featureGraphicURL && (
+    <div
+      class="absolute inset-x-0 -top-8 sm:-top-12 -z-10 h-72 sm:h-96 overflow-hidden rounded-3xl opacity-50 blur-xl"
+      aria-hidden="true"
+      style={`background-image: url(${hero.featureGraphicURL}); background-size: cover; background-position: center;`}
+    ></div>
+  )}
+
+  <div class="rise grid gap-8 sm:gap-10 sm:grid-cols-[auto_1fr] items-center">
+    {hero.iconURL && (
+      <img
+        src={hero.iconURL}
+        alt=""
+        width="160"
+        height="160"
+        class="size-28 sm:size-40 rounded-3xl shadow-2xl shadow-black/10 ring-1 ring-black/5 bg-white"
+        loading="eager"
+        decoding="async"
+      />
+    )}
+    <div class="space-y-4">
+      <h1 class="text-4xl sm:text-5xl font-bold tracking-tight">{hero.title}</h1>
+      {hero.subtitle && (
+        <p class="text-lg sm:text-xl text-[color:var(--color-text-soft)]">{hero.subtitle}</p>
+      )}
+      {site.showStoreBadges !== false && (
+        <StoreBadges views={views} />
+      )}
+    </div>
+  </div>
+</section>

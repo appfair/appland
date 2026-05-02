@@ -1,0 +1,54 @@
+---
+import type { PlatformView } from '../lib/types.ts';
+
+interface Props {
+  views: Partial<Record<'ios' | 'android', PlatformView | null>>;
+}
+
+const { views } = Astro.props;
+
+const ios = views.ios;
+const android = views.android;
+
+const APPLE_BADGE = 'https://appfair.org/assets/badges/apple-app-store.svg';
+const GOOGLE_BADGE = 'https://appfair.org/assets/badges/google-play-store.svg';
+---
+
+<div class="flex flex-wrap gap-3 items-center">
+  {ios?.storeURL && (
+    <a
+      href={ios.storeURL}
+      class="inline-block transition hover:scale-[1.03] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-accent)] focus:ring-offset-2 focus:ring-offset-[color:var(--color-bg)] rounded-xl"
+      target="_blank"
+      rel="noopener"
+      aria-label="Download on the App Store"
+    >
+      <img
+        src={APPLE_BADGE}
+        alt="Download on the App Store"
+        width="156"
+        height="52"
+        class="h-12 sm:h-14 w-auto"
+        loading="lazy"
+      />
+    </a>
+  )}
+  {android?.storeURL && (
+    <a
+      href={android.storeURL}
+      class="inline-block transition hover:scale-[1.03] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-accent)] focus:ring-offset-2 focus:ring-offset-[color:var(--color-bg)] rounded-xl"
+      target="_blank"
+      rel="noopener"
+      aria-label="Get it on Google Play"
+    >
+      <img
+        src={GOOGLE_BADGE}
+        alt="Get it on Google Play"
+        width="180"
+        height="52"
+        class="h-12 sm:h-14 w-auto"
+        loading="lazy"
+      />
+    </a>
+  )}
+</div>
