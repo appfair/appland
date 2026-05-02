@@ -1,0 +1,868 @@
+{
+  "$schema" : "https://appfair.org/schemas/appindex/v1.json",
+  "apps" : [
+    {
+      "description" : {
+        "ar" : "Net Skip هو متصفح الويب المجاني ومفتوح المصدر من App Fair. يقدم تجربة تصفح بسيطة وأنيقة، مما يجعله أسرع متصفح ويب متاح على أي جهاز محمول، في أي مكان.\n\nعلى عكس معظم المتصفحات الأخرى في السوق، يتميز Net Skip بما لا يحتويه:\n\n  • لا يحتوي على إعلانات أو تتبع مدمج\n  • لا يحتوي على ميزات العملات الرقمية أو برامج المكافآت\n  • لا يحتوي على عمليات شراء داخل التطبيق أو اشتراكات\n  • لا يحتوي على قياس عن بُعد أو تحليلات أو جمع بيانات المستخدم\n  • لا يوجد تحقيق ربح من المستخدم بأي شكل من الأشكال\n\nالكود المصدري لـ Net Skip - مع جميع مشاريع App Fair - مجاني ومفتوح المصدر، ويتم توزيعه بموجب ترخيص حر ومفتوح المصدر. يمكنك الوصول إلى الكود المصدري للمراجعة والتعديل على https://github.com/Net-Skip/Net-Skip/.\n\nNet Skip هو جزء من مشروع App Fair، وهو منظمة خيرية غير ربحية مقرها في كومنولث ماساتشوستس تأسست لإنشاء وصيانة السلع العامة الرقمية في شكل تطبيقات للهاتف المحمول. تعرف على المزيد حول مشروع App Fair على https://appfair.org وساعدنا في بناء سوق التطبيقات لدينا من خلال نشر الكلمة عن Net Skip وتطبيقات مشاريعنا الأخرى.",
+        "de" : "Net Skip ist der kostenlose Open-Source-Webbrowser von App Fair. Er bietet ein minimalistisches und stilvolles Surferlebnis und ermöglicht so das schnellste Web-Browsing auf jedem mobilen Gerät, überall.\n\nIm Gegensatz zu den meisten anderen Browsern auf dem Markt zeichnet sich Net Skip am besten durch das aus, was er *nicht* bietet:\n\n  • Keine eingebettete Werbung oder Verfolgung\n  • Keine Kryptowährungs-Funktionen oder Belohnungsprogramme\n  • Keine In-App-Käufe oder Abonnements\n  • Keine Telemetrie, Analysen oder Erfassung von Nutzerdaten\n  • Keine Monetarisierung des Nutzers der App in irgendeiner Form\n\nDer Quellcode von Net Skip – wie auch der aller App-Fair-Projekte – ist kostenlos und Open-Source und wird unter einer freien und Open-Source-Lizenz vertrieben. Sie können den Quellcode zur Überprüfung und Bearbeitung unter https://github.com/Net-Skip/Net-Skip/ einsehen.\n\nNet Skip ist Teil des App-Fair-Projekts, einer gemeinnützigen Wohltätigkeitsorganisation mit Sitz im Commonwealth of Massachusetts, die gegründet wurde, um digitale öffentliche Güter in Form von mobilen Anwendungen zu schaffen und zu pflegen. Erfahren Sie mehr über das App-Fair-Projekt unter https://appfair.org und helfen Sie uns, unseren App-Marktplatz aufzubauen, indem Sie Net Skip und unsere anderen Projekt-Apps weiterempfehlen.",
+        "en" : "Net Skip is the App Fair's free and open-source web browser. It presents a minimal and tasteful browsing experience, resulting in the fastest web browsing experience available on any mobile device, anywhere.\n\nIn contrast with most other browsers on the market, Net Skip is best characterized by what it does *not* feature:\n\n  • No embedded advertising or tracking\n  • No cryptocurrency features or rewards programs\n  • No in-app purchases or subscriptions\n  • No telemetry, analytics, or user data collection\n  • No monetization whatsoever of the user of the app\n\nThe source code for Net Skip – along with all App Fair projects – is free and open-source, and is distributed under a free and open-source license. You can access the source for review and modification at https://github.com/Net-Skip/Net-Skip/.\n\nNet Skip is part of the App Fair Project, a non-profit charity based in the Commonwealth of Massachusetts founded to create and maintain digital public goods in the form of mobile applications. Find out more about the App Fair Project at https://appfair.org and help us build our app marketplace by spreading the word about Net Skip and our other project apps.",
+        "es" : "Net Skip es el navegador web gratuito y de código abierto de App Fair. Ofrece una experiencia de navegación minimalista y elegante, lo que se traduce en la navegación web más rápida disponible en cualquier dispositivo móvil, en cualquier lugar.\n\nA diferencia de la mayoría de los navegadores del mercado, Net Skip se caracteriza mejor por lo que *no* incluye:\n\n  • Sin publicidad ni seguimiento integrado\n  • Sin funciones de criptomonedas ni programas de recompensas\n  • Sin compras integradas ni suscripciones\n  • Sin telemetría, análisis ni recopilación de datos del usuario\n  • Sin ningún tipo de monetización del usuario de la aplicación\n\nEl código fuente de Net Skip, junto con el de todos los proyectos de App Fair, es gratuito y de código abierto, y se distribuye bajo una licencia libre y de código abierto. Puede acceder al código fuente para revisarlo y modificarlo en https://github.com/Net-Skip/Net-Skip/.\n\nNet Skip forma parte del Proyecto App Fair, una organización benéfica sin ánimo de lucro con sede en la Mancomunidad de Massachusetts, fundada para crear y mantener bienes públicos digitales en forma de aplicaciones móviles. Conozca más sobre el Proyecto App Fair en https://appfair.org y ayúdenos a construir nuestro mercado de aplicaciones difundiendo el conocimiento sobre Net Skip y nuestras otras aplicaciones del proyecto.",
+        "fr" : "Net Skip est le navigateur web gratuit et open source d'App Fair. Il propose une expérience de navigation minimaliste et soignée, offrant ainsi la navigation web la plus rapide disponible sur n'importe quel appareil mobile, partout.\n\nContrairement à la plupart des autres navigateurs du marché, Net Skip se caractérise surtout par ce qu'il *ne* propose *pas* :\n\n  • Pas de publicité ni de pistage intégrés\n  • Pas de fonctionnalités de cryptomonnaie ni de programmes de récompense\n  • Pas d'achats intégrés ni d'abonnements\n  • Pas de télémétrie, d'analyse ni de collecte de données utilisateur\n  • Aucune monétisation de l'utilisateur de l'application\n\nLe code source de Net Skip — ainsi que celui de tous les projets App Fair — est gratuit et open source, et est distribué sous une licence libre et open source. Vous pouvez accéder au code source pour le consulter et le modifier sur https://github.com/Net-Skip/Net-Skip/.\n\nNet Skip fait partie du projet App Fair, une organisation caritative à but non lucratif basée dans le Commonwealth du Massachusetts, fondée pour créer et maintenir des biens publics numériques sous forme d'applications mobiles. Pour en savoir plus sur le projet App Fair, rendez-vous sur https://appfair.org et aidez-nous à construire notre place de marché en parlant de Net Skip et de nos autres applications.",
+        "hi" : "Net Skip, App Fair का मुफ़्त और ओपन-सोर्स वेब ब्राउज़र है। यह एक न्यूनतम और रुचिकर ब्राउज़िंग अनुभव प्रदान करता है, जिसके परिणामस्वरूप किसी भी मोबाइल डिवाइस पर, कहीं भी, सबसे तेज़ वेब ब्राउज़िंग अनुभव मिलता है।\n\nबाज़ार के अधिकांश अन्य ब्राउज़रों के विपरीत, Net Skip की विशेषता उन चीज़ों से है जो इसमें *नहीं* हैं:\n\n  • कोई एम्बेडेड विज्ञापन या ट्रैकिंग नहीं\n  • कोई क्रिप्टोकरेंसी सुविधा या रिवॉर्ड प्रोग्राम नहीं\n  • कोई इन-ऐप खरीद या सदस्यता नहीं\n  • कोई टेलीमेट्री, एनालिटिक्स या उपयोगकर्ता डेटा संग्रह नहीं\n  • ऐप के उपयोगकर्ता का किसी भी प्रकार से कोई मुद्रीकरण नहीं\n\nNet Skip का सोर्स कोड – सभी App Fair प्रोजेक्ट्स के साथ – मुफ़्त और ओपन-सोर्स है, और एक मुफ़्त और ओपन-सोर्स लाइसेंस के तहत वितरित किया जाता है। आप समीक्षा और संशोधन के लिए सोर्स कोड को https://github.com/Net-Skip/Net-Skip/ पर देख सकते हैं।\n\nNet Skip, App Fair प्रोजेक्ट का हिस्सा है, जो कॉमनवेल्थ ऑफ़ मैसाचुसेट्स में स्थित एक गैर-लाभकारी धर्मार्थ संस्था है, जिसकी स्थापना मोबाइल एप्लिकेशन के रूप में डिजिटल सार्वजनिक वस्तुओं को बनाने और बनाए रखने के लिए की गई थी। App Fair प्रोजेक्ट के बारे में अधिक जानने के लिए https://appfair.org पर जाएँ और Net Skip तथा हमारे अन्य प्रोजेक्ट ऐप्स के बारे में जानकारी फैलाकर हमारे ऐप मार्केटप्लेस के निर्माण में हमारी मदद करें।",
+        "id" : "Net Skip adalah peramban web gratis dan sumber terbuka dari App Fair. Peramban ini menyajikan pengalaman menjelajah yang minimalis dan elegan, sehingga menghasilkan pengalaman menjelajah web tercepat yang tersedia di perangkat seluler mana pun, di mana pun.\n\nBerbeda dengan kebanyakan peramban lain di pasaran, Net Skip paling baik dicirikan oleh apa yang *tidak* dimilikinya:\n\n  • Tanpa iklan atau pelacakan tersemat\n  • Tanpa fitur kriptokurensi atau program hadiah\n  • Tanpa pembelian dalam aplikasi atau langganan\n  • Tanpa telemetri, analitik, atau pengumpulan data pengguna\n  • Tanpa monetisasi apa pun terhadap pengguna aplikasi\n\nKode sumber Net Skip – bersama dengan semua proyek App Fair – gratis dan sumber terbuka, dan didistribusikan di bawah lisensi bebas dan sumber terbuka. Anda dapat mengakses kode sumbernya untuk ditinjau dan dimodifikasi di https://github.com/Net-Skip/Net-Skip/.\n\nNet Skip adalah bagian dari Proyek App Fair, sebuah organisasi nirlaba yang berbasis di Persemakmuran Massachusetts yang didirikan untuk menciptakan dan memelihara barang publik digital dalam bentuk aplikasi seluler. Pelajari lebih lanjut tentang Proyek App Fair di https://appfair.org dan bantu kami membangun pasar aplikasi kami dengan menyebarkan informasi tentang Net Skip dan aplikasi proyek kami lainnya.",
+        "it" : "Net Skip è il browser web gratuito e open source di App Fair. Offre un'esperienza di navigazione minimale ed elegante, garantendo la navigazione web più veloce disponibile su qualsiasi dispositivo mobile, ovunque.\n\nA differenza della maggior parte degli altri browser sul mercato, Net Skip si distingue soprattutto per ciò che *non* offre:\n\n  • Nessuna pubblicità o tracciamento integrati\n  • Nessuna funzione di criptovaluta o programma di ricompense\n  • Nessun acquisto in-app o abbonamento\n  • Nessuna telemetria, analisi o raccolta di dati utente\n  • Nessuna monetizzazione dell'utente dell'app\n\nIl codice sorgente di Net Skip – insieme a quello di tutti i progetti App Fair – è gratuito e open source, ed è distribuito con una licenza libera e open source. Puoi accedere al codice sorgente per revisionarlo e modificarlo su https://github.com/Net-Skip/Net-Skip/.\n\nNet Skip fa parte del Progetto App Fair, un'organizzazione benefica senza scopo di lucro con sede nel Commonwealth del Massachusetts, fondata per creare e mantenere beni pubblici digitali sotto forma di applicazioni mobili. Scopri di più sul Progetto App Fair su https://appfair.org e aiutaci a costruire il nostro mercato di app diffondendo la voce su Net Skip e sulle nostre altre app del progetto.",
+        "ja" : "Net Skipは、App Fairが提供する無料のオープンソースウェブブラウザです。最小限で洗練されたブラウジング体験を提供し、あらゆるモバイル端末で、どこでも最速のウェブブラウジングを実現します。\n\n市場の他の多くのブラウザとは異なり、Net Skipの最大の特徴は、搭載されていないものにあります:\n\n  • 埋め込み型の広告やトラッキングなし\n  • 暗号通貨機能や報酬プログラムなし\n  • アプリ内課金やサブスクリプションなし\n  • テレメトリ、解析、ユーザーデータの収集なし\n  • アプリ利用者からの収益化は一切なし\n\nNet Skipのソースコードは、すべてのApp Fairプロジェクトと同様に、無料かつオープンソースであり、自由でオープンソースのライセンスのもとで配布されています。レビューや変更のためのソースコードはhttps://github.com/Net-Skip/Net-Skip/ で公開されています。\n\nNet Skipは、マサチューセッツ州を拠点とする非営利慈善団体であるApp Fair Projectの一部であり、モバイルアプリケーションという形でデジタル公共財を作成・維持するために設立されました。App Fair Projectの詳細はhttps://appfair.org をご覧ください。Net Skipやその他のプロジェクトアプリを広めることで、私たちのアプリマーケットプレイスの構築にぜひご協力ください。",
+        "ko" : "Net Skip은 App Fair가 제공하는 무료 오픈소스 웹 브라우저입니다. 미니멀하고 세련된 브라우징 경험을 제공하여, 어떤 모바일 기기에서도, 어디서나 가장 빠른 웹 브라우징을 가능하게 합니다.\n\n시중의 대부분의 다른 브라우저와 달리, Net Skip은 *포함하지 않는* 것으로 가장 잘 설명됩니다:\n\n  • 임베디드 광고 또는 추적 없음\n  • 암호화폐 기능이나 보상 프로그램 없음\n  • 인앱 결제나 구독 없음\n  • 텔레메트리, 분석 또는 사용자 데이터 수집 없음\n  • 앱 사용자에 대한 일체의 수익화 없음\n\nNet Skip의 소스 코드는 모든 App Fair 프로젝트와 마찬가지로 무료이며 오픈소스이고, 자유 및 오픈소스 라이선스로 배포됩니다. 검토 및 수정 목적의 소스 코드는 https://github.com/Net-Skip/Net-Skip/ 에서 확인할 수 있습니다.\n\nNet Skip은 모바일 애플리케이션 형태의 디지털 공공재를 만들고 유지하기 위해 설립된, 매사추세츠 연방에 본부를 둔 비영리 자선 단체인 App Fair 프로젝트의 일부입니다. App Fair 프로젝트에 대한 자세한 내용은 https://appfair.org 에서 확인하실 수 있으며, Net Skip과 다른 프로젝트 앱을 널리 알려 저희 앱 마켓플레이스 구축에 도움을 주시기 바랍니다.",
+        "pt-BR" : "O Net Skip é o navegador web gratuito e de código aberto da App Fair. Ele oferece uma experiência de navegação minimalista e elegante, proporcionando a navegação web mais rápida disponível em qualquer dispositivo móvel, em qualquer lugar.\n\nAo contrário da maioria dos outros navegadores no mercado, o Net Skip é mais bem caracterizado pelo que *não* oferece:\n\n  • Sem publicidade ou rastreamento incorporados\n  • Sem recursos de criptomoedas ou programas de recompensas\n  • Sem compras dentro do aplicativo ou assinaturas\n  • Sem telemetria, análises ou coleta de dados do usuário\n  • Sem qualquer monetização do usuário do aplicativo\n\nO código-fonte do Net Skip — junto com todos os projetos da App Fair — é gratuito e de código aberto, e é distribuído sob uma licença livre e de código aberto. Você pode acessar o código-fonte para revisão e modificação em https://github.com/Net-Skip/Net-Skip/.\n\nO Net Skip faz parte do Projeto App Fair, uma organização beneficente sem fins lucrativos sediada na Comunidade de Massachusetts, fundada para criar e manter bens públicos digitais na forma de aplicativos móveis. Saiba mais sobre o Projeto App Fair em https://appfair.org e ajude-nos a construir nosso mercado de aplicativos divulgando o Net Skip e nossos outros aplicativos do projeto.",
+        "ru" : "Net Skip — это бесплатный веб-браузер с открытым исходным кодом от App Fair. Он обеспечивает минималистичный и изысканный опыт просмотра, что делает его самым быстрым веб-браузером, доступным на любом мобильном устройстве в любой точке мира.\n\nВ отличие от большинства других браузеров на рынке, Net Skip лучше всего характеризуется тем, чего в нём *нет*:\n\n  • Нет встроенной рекламы или отслеживания\n  • Нет функций криптовалюты или бонусных программ\n  • Нет встроенных покупок или подписок\n  • Нет телеметрии, аналитики или сбора пользовательских данных\n  • Нет какой-либо монетизации пользователя приложения\n\nИсходный код Net Skip — наряду со всеми проектами App Fair — является бесплатным и открытым, и распространяется по свободной лицензии с открытым исходным кодом. Вы можете получить доступ к исходному коду для просмотра и изменения по адресу https://github.com/Net-Skip/Net-Skip/.\n\nNet Skip является частью проекта App Fair — некоммерческой благотворительной организации, базирующейся в Содружестве Массачусетс и основанной для создания и поддержки цифровых общественных благ в виде мобильных приложений. Узнайте больше о проекте App Fair на https://appfair.org и помогите нам в построении нашего магазина приложений, рассказывая о Net Skip и других наших проектах.",
+        "zh-Hans" : "Net Skip 是 App Fair 推出的免费开源网页浏览器。它带来极简而优雅的浏览体验,是任何移动设备上随时随地都能享受的最快网页浏览器。\n\n与市场上大多数其他浏览器不同,Net Skip 最大的特点在于它*不*包含的内容:\n\n  • 没有内置广告或跟踪\n  • 没有加密货币功能或奖励计划\n  • 没有应用内购买或订阅\n  • 没有遥测、分析或用户数据收集\n  • 不以任何形式从应用用户身上获取收益\n\nNet Skip 的源代码——与所有 App Fair 项目一样——免费且开源,以自由开源许可证发布。您可以在 https://github.com/Net-Skip/Net-Skip/ 上获取源代码以供审阅和修改。\n\nNet Skip 是 App Fair 项目的一部分,这是一家位于马萨诸塞联邦的非营利慈善组织,致力于创建和维护以移动应用形式呈现的数字公共产品。请访问 https://appfair.org 了解更多关于 App Fair 项目的信息,并通过分享 Net Skip 和我们其他项目应用,帮助我们建设我们的应用市场。"
+      },
+      "keywords" : {
+        "ar" : [
+          "متصفح",
+          "ويب",
+          "سكيب",
+          "تطبيق-مصغر"
+        ],
+        "de" : [
+          "Web",
+          "Browser",
+          "MiniApp",
+          "Skip",
+          "User-Agent"
+        ],
+        "en" : [
+          "web",
+          "browser",
+          "miniapp",
+          "skip",
+          "user-agent"
+        ],
+        "es" : [
+          "web",
+          "navegador",
+          "miniapp",
+          "skip",
+          "user-agent"
+        ],
+        "fr" : [
+          "web",
+          "navigateur",
+          "miniapp",
+          "skip",
+          "user-agent"
+        ],
+        "hi" : [
+          "वेब",
+          "ब्राउज़र",
+          "मिनीऐप",
+          "स्किप"
+        ],
+        "id" : [
+          "web",
+          "peramban",
+          "browser",
+          "miniapp",
+          "skip",
+          "user-agent"
+        ],
+        "it" : [
+          "web",
+          "browser",
+          "miniapp",
+          "skip",
+          "user-agent"
+        ],
+        "ja" : [
+          "ウェブ",
+          "ブラウザ",
+          "ミニアプリ",
+          "スキップ"
+        ],
+        "ko" : [
+          "웹",
+          "브라우저",
+          "미니앱",
+          "스킵"
+        ],
+        "pt-BR" : [
+          "web",
+          "navegador",
+          "miniapp",
+          "skip",
+          "user-agent"
+        ],
+        "ru" : [
+          "веб",
+          "браузер",
+          "скип",
+          "user-agent"
+        ],
+        "zh-Hans" : [
+          "网页",
+          "浏览器",
+          "小应用",
+          "Skip",
+          "用户代理"
+        ]
+      },
+      "links" : {
+        "privacy" : {
+          "en" : "https://appfair.org/privacy"
+        },
+        "support" : {
+          "en" : "https://github.com/Net-Skip/Net-Skip/issues"
+        }
+      },
+      "name" : "NetSkip",
+      "platforms" : {
+        "android" : {
+          "applicationId" : "org.appfair.app.Net_Skip",
+          "assets" : {
+            "featureGraphic" : {
+              "en" : {
+                "digest" : "sha256:cb95816806ac8ca734a34cf833e0f823a8ce469193dfd108900b7a022d2da815",
+                "height" : 500,
+                "location" : "Android/fastlane/metadata/android/en-US/images/featureGraphic.png",
+                "mimeType" : "image/png",
+                "size" : 73280,
+                "width" : 1024
+              }
+            },
+            "icon" : {
+              "digest" : "sha256:5b25791e1c6fa931b9892adb7f8c15151ee95d371c8768101492a0657d99184f",
+              "height" : 512,
+              "location" : "Android/fastlane/metadata/android/en-US/images/icon.png",
+              "mimeType" : "image/png",
+              "size" : 129295,
+              "width" : 512
+            },
+            "screenshots" : {
+              "en" : [
+                {
+                  "digest" : "sha256:4bdf97be8ef991cf67270837a51c316693923c007f5d496241a19712e94e3b18",
+                  "height" : 2400,
+                  "location" : "Android/fastlane/metadata/android/en-US/images/phoneScreenshots/1_en-US.png",
+                  "mimeType" : "image/png",
+                  "size" : 287689,
+                  "width" : 1080
+                },
+                {
+                  "digest" : "sha256:9aeb62beb2eef3bc57c37754aedab4434aa2cf833c5024d7a23808ec00e48a23",
+                  "height" : 2400,
+                  "location" : "Android/fastlane/metadata/android/en-US/images/phoneScreenshots/2_en-US.png",
+                  "mimeType" : "image/png",
+                  "size" : 321010,
+                  "width" : 1080
+                }
+              ]
+            }
+          },
+          "buildNumber" : "228",
+          "channels" : {
+            "googleplaystore" : {
+              "id" : "org.appfair.app.Net_Skip",
+              "url" : "https://play.google.com/store/apps/details?id=org.appfair.app.Net_Skip"
+            }
+          },
+          "metadata" : {
+            "manifest" : {
+              "features" : [
+                {
+                  "name" : "android.hardware.telephony",
+                  "required" : "false"
+                },
+                {
+                  "name" : "android.hardware.wifi",
+                  "required" : "false"
+                },
+                {
+                  "name" : "android.hardware.screen.PORTRAIT",
+                  "required" : "false"
+                },
+                {
+                  "name" : "android.hardware.microphone",
+                  "required" : "false"
+                },
+                {
+                  "name" : "android.hardware.camera",
+                  "required" : "false"
+                },
+                {
+                  "name" : "android.hardware.camera2",
+                  "required" : "false"
+                },
+                {
+                  "name" : "android.hardware.sensor.proximity",
+                  "required" : "false"
+                }
+              ],
+              "icon" : "@mipmap/ic_launcher",
+              "label" : "Net Skip",
+              "name" : ".AndroidAppMain"
+            }
+          },
+          "permissions" : [
+            {
+              "key" : "android.permission.INTERNET"
+            },
+            {
+              "key" : "android.permission.READ_CLIPBOARD"
+            },
+            {
+              "key" : "android.permission.BLUETOOTH_CONNECT"
+            },
+            {
+              "key" : "android.permission.RECORD_AUDIO"
+            },
+            {
+              "key" : "android.permission.MODIFY_AUDIO_SETTINGS"
+            },
+            {
+              "key" : "android.permission.ACCESS_NETWORK_STATE"
+            },
+            {
+              "key" : "android.permission.ACCESS_WIFI_STATE"
+            },
+            {
+              "key" : "android.permission.WAKE_LOCK"
+            },
+            {
+              "key" : "android.permission.READ_EXTERNAL_STORAGE"
+            },
+            {
+              "key" : "android.permission.READ_MEDIA_AUDIO"
+            },
+            {
+              "key" : "android.permission.GET_ACCOUNTS"
+            },
+            {
+              "key" : "android.permission.READ_CONTACTS"
+            },
+            {
+              "key" : "android.permission.WRITE_CONTACTS"
+            },
+            {
+              "key" : "android.permission.MANAGE_ACCOUNTS"
+            },
+            {
+              "key" : "android.permission.READ_PROFILE"
+            },
+            {
+              "key" : "android.permission.WRITE_SYNC_SETTINGS"
+            },
+            {
+              "key" : "android.permission.READ_SYNC_SETTINGS"
+            },
+            {
+              "key" : "android.permission.AUTHENTICATE_ACCOUNTS"
+            },
+            {
+              "key" : "android.permission.VIBRATE"
+            },
+            {
+              "key" : "android.permission.SYSTEM_ALERT_WINDOW"
+            },
+            {
+              "key" : "android.permission.READ_PHONE_STATE"
+            },
+            {
+              "key" : "android.permission.RECEIVE_BOOT_COMPLETED"
+            },
+            {
+              "key" : "android.permission.USE_FINGERPRINT"
+            },
+            {
+              "key" : "android.permission.USE_BIOMETRIC"
+            },
+            {
+              "key" : "android.permission.INSTALL_SHORTCUT"
+            },
+            {
+              "key" : "android.permission.CAMERA"
+            },
+            {
+              "key" : "android.permission.BLUETOOTH"
+            },
+            {
+              "key" : "android.permission.MANAGE_OWN_CALLS"
+            },
+            {
+              "key" : "android.permission.READ_PHONE_NUMBERS"
+            },
+            {
+              "key" : "android.permission.POST_NOTIFICATIONS"
+            },
+            {
+              "key" : "android.permission.WRITE_EXTERNAL_STORAGE"
+            },
+            {
+              "key" : "android.permission.ACCESS_BACKGROUND_LOCATION"
+            },
+            {
+              "key" : "android.permission.READ_APP_BADGE"
+            },
+            {
+              "key" : "com.android.launcher.permission.INSTALL_SHORTCUT"
+            },
+            {
+              "key" : "com.android.launcher.permission.UNINSTALL_SHORTCUT"
+            },
+            {
+              "key" : "com.sec.android.provider.badge.permission.READ"
+            },
+            {
+              "key" : "com.sec.android.provider.badge.permission.WRITE"
+            },
+            {
+              "key" : "com.htc.launcher.permission.READ_SETTINGS"
+            },
+            {
+              "key" : "com.htc.launcher.permission.UPDATE_SHORTCUT"
+            },
+            {
+              "key" : "com.sonyericsson.home.permission.BROADCAST_BADGE"
+            },
+            {
+              "key" : "com.sonymobile.home.permission.PROVIDER_INSERT_BADGE"
+            },
+            {
+              "key" : "com.anddoes.launcher.permission.UPDATE_COUNT"
+            },
+            {
+              "key" : "com.majeur.launcher.permission.UPDATE_BADGE"
+            },
+            {
+              "key" : "com.huawei.android.launcher.permission.CHANGE_BADGE"
+            },
+            {
+              "key" : "com.huawei.android.launcher.permission.READ_SETTINGS"
+            },
+            {
+              "key" : "com.huawei.android.launcher.permission.WRITE_SETTINGS"
+            },
+            {
+              "key" : "com.oppo.launcher.permission.READ_SETTINGS"
+            },
+            {
+              "key" : "com.oppo.launcher.permission.WRITE_SETTINGS"
+            },
+            {
+              "key" : "me.everything.badger.permission.BADGE_COUNT_READ"
+            },
+            {
+              "key" : "me.everything.badger.permission.BADGE_COUNT_WRITE"
+            }
+          ],
+          "subtitle" : {
+            "ar" : "متصفح ويب راقي",
+            "de" : "Ein humaner Web-Browser",
+            "en" : "A humane web browser",
+            "es" : "Un navegador web humano",
+            "fr" : "Un navigateur web humain",
+            "hi" : "एक मानवीय वेब ब्राउज़र",
+            "id" : "Peramban web yang humanis",
+            "it" : "Un browser web umano",
+            "ja" : "人にやさしいウェブブラウザ",
+            "ko" : "인간적인 웹 브라우저",
+            "pt-BR" : "Um navegador web humano",
+            "ru" : "Гуманный веб-браузер",
+            "zh-Hans" : "人性化的网页浏览器"
+          },
+          "version" : "1.4.15"
+        },
+        "ios" : {
+          "assets" : {
+            "icon" : {
+              "digest" : "sha256:bea180386fbbfa05dae2fb85086eb522b4ea4e8adbd46bd21eaebb094ed72243",
+              "height" : 1024,
+              "location" : "Darwin/Assets.xcassets/AppIcon.appiconset/appicon-ios-marketing-1024x1024@1x.png",
+              "mimeType" : "image/png",
+              "size" : 442604,
+              "width" : 1024
+            },
+            "screenshots" : {
+              "en" : [
+                {
+                  "digest" : "sha256:a02689428f1cf75d3d9afa3714338142125902f621cb4f922d49fa917f1db7ab",
+                  "height" : 2208,
+                  "location" : "Darwin/fastlane/screenshots/en-US/0_APP_IPHONE_55_0.png",
+                  "mimeType" : "image/png",
+                  "size" : 1232450,
+                  "width" : 1242
+                },
+                {
+                  "digest" : "sha256:5a44ba5370be3c404bac29d370a8fefd43139fecb4b96f305286c11792d71f23",
+                  "height" : 2778,
+                  "location" : "Darwin/fastlane/screenshots/en-US/0_APP_IPHONE_65_0.png",
+                  "mimeType" : "image/png",
+                  "size" : 170945,
+                  "width" : 1284
+                },
+                {
+                  "digest" : "sha256:a49a966d2701d330b794f8c1edae19699e72cbaf7c8853665da6adceca50d34a",
+                  "height" : 2778,
+                  "location" : "Darwin/fastlane/screenshots/en-US/1_APP_IPHONE_65_1.png",
+                  "mimeType" : "image/png",
+                  "size" : 843307,
+                  "width" : 1284
+                },
+                {
+                  "digest" : "sha256:59e86203545cf8ab2de814ad3faff17bd1e1298289570bd581442103547791bd",
+                  "height" : 2778,
+                  "location" : "Darwin/fastlane/screenshots/en-US/2_APP_IPHONE_65_2.png",
+                  "mimeType" : "image/png",
+                  "size" : 1476136,
+                  "width" : 1284
+                },
+                {
+                  "digest" : "sha256:26946125572b49127cfe5073957b37be2ac419c5025a9aa628b75cc3d1456487",
+                  "height" : 2778,
+                  "location" : "Darwin/fastlane/screenshots/en-US/3_APP_IPHONE_65_3.png",
+                  "mimeType" : "image/png",
+                  "size" : 654543,
+                  "width" : 1284
+                },
+                {
+                  "digest" : "sha256:895b0333024c9eb8bc82b4bc87fc65f5402c8578263f900390073f1c62bbe201",
+                  "height" : 2778,
+                  "location" : "Darwin/fastlane/screenshots/en-US/4_APP_IPHONE_65_4.png",
+                  "mimeType" : "image/png",
+                  "size" : 1974299,
+                  "width" : 1284
+                },
+                {
+                  "digest" : "sha256:853d3819cae08b4461d7025b5ad560f1ce8d7c9420598b6a43e5cf42cc615d0c",
+                  "height" : 2778,
+                  "location" : "Darwin/fastlane/screenshots/en-US/5_APP_IPHONE_65_5.png",
+                  "mimeType" : "image/png",
+                  "size" : 140149,
+                  "width" : 1284
+                }
+              ]
+            }
+          },
+          "buildNumber" : "228",
+          "bundleIdentifier" : "org.appfair.app.Net-Skip",
+          "channels" : {
+            "appleappstore" : {
+              "id" : "1640618584",
+              "url" : "https://apps.apple.com/app/id1640618584"
+            }
+          },
+          "metadata" : {
+            "entitlements" : {
+              "aps-environment" : "production",
+              "com.apple.developer.applesignin" : [
+                "Default"
+              ],
+              "com.apple.developer.authentication-services.autofill-credential-provider" : true,
+              "com.apple.developer.browser.app-installation" : true,
+              "com.apple.developer.siri" : true,
+              "com.apple.developer.web-browser" : true,
+              "com.apple.security.application-groups" : [
+                "group.org.appfair",
+                "group.org.appfair.app"
+              ],
+              "keychain-access-groups" : [
+                "$(AppIdentifierPrefix)org.appfair"
+              ]
+            },
+            "infoPlist" : {
+              "CFBundleURLTypes" : [
+                {
+                  "CFBundleTypeRole" : "Viewer",
+                  "CFBundleURLName" : "Web site URL",
+                  "CFBundleURLSchemes" : [
+                    "https",
+                    "http"
+                  ]
+                },
+                {
+                  "CFBundleTypeRole" : "Viewer",
+                  "CFBundleURLName" : "File URL",
+                  "CFBundleURLSchemes" : [
+                    "file"
+                  ]
+                },
+                {
+                  "CFBundleTypeRole" : "Viewer",
+                  "CFBundleURLName" : "Local file URL",
+                  "CFBundleURLSchemes" : [
+                    "netskip"
+                  ]
+                }
+              ],
+              "LSApplicationQueriesSchemes" : [
+                "paypal",
+                "instagram",
+                "instagram-stories",
+                "youtube",
+                "pocket",
+                "firefox-focus",
+                "firefox-klar",
+                "ymail",
+                "ms-outlook",
+                "airmail",
+                "italiaonline-mailto",
+                "mailru-mailto",
+                "mymail-mailto",
+                "readdle-spark",
+                "itms-books",
+                "googlegmail",
+                "fastmail",
+                "protonmail",
+                "whatsapp",
+                "comgooglemaps-x-callback",
+                "foursquare",
+                "here-location",
+                "yandexmaps",
+                "yandexnavi",
+                "comgooglemaps",
+                "twitter",
+                "vk",
+                "waze",
+                "googlechrome",
+                "firefox",
+                "touch-http",
+                "yandexbrowser-open-url",
+                "vimeo",
+                "vine",
+                "coub",
+                "uber",
+                "citymapper",
+                "lyft",
+                "opera-http",
+                "ddgQuickLink",
+                "moovit",
+                "alook",
+                "dgis",
+                "microsoft-edge-http",
+                "brave",
+                "onionhttp",
+                "ucbrowser",
+                "dolphin",
+                "org-appextension-feature-password-management"
+              ]
+            }
+          },
+          "permissions" : [
+            {
+              "description" : {
+                "ar" : "يستخدم Net Skip البلوتوث للسماح للمواقع التي تزورها بالتواصل مع الأجهزة القريبة مثل أجهزة تتبع اللياقة وأذرع التحكم وأجهزة إنترنت الأشياء عبر واجهة Web Bluetooth عند منحها الإذن.",
+                "de" : "Net Skip verwendet Bluetooth, damit besuchte Websites mit deiner Erlaubnis über die Web-Bluetooth-API mit Geräten in der Nähe wie Fitness-Trackern, Spielecontrollern und IoT-Geräten kommunizieren können.",
+                "en" : "Net Skip uses Bluetooth so that websites you visit can communicate with nearby devices such as fitness trackers, game controllers, and IoT hardware via the Web Bluetooth API when you grant them permission.",
+                "es" : "Net Skip usa Bluetooth para que los sitios web que visitas puedan comunicarse con dispositivos cercanos como pulseras de actividad, mandos de juego y hardware IoT a través de la API Web Bluetooth cuando les concedes permiso.",
+                "fr" : "Net Skip utilise le Bluetooth pour permettre aux sites web que vous consultez de communiquer, avec votre autorisation, avec des appareils à proximité tels que des trackers d’activité, des manettes et du matériel IoT via l’API Web Bluetooth.",
+                "hi" : "Net Skip ब्लूटूथ का उपयोग करता है ताकि जिन वेबसाइटों पर आप जाते हैं वे आपकी अनुमति देने पर Web Bluetooth API के माध्यम से फ़िटनेस ट्रैकर, गेम कंट्रोलर और IoT हार्डवेयर जैसे आस-पास के उपकरणों से संवाद कर सकें।",
+                "id" : "Net Skip menggunakan Bluetooth agar situs web yang Anda kunjungi dapat berkomunikasi dengan perangkat di sekitar seperti pelacak kebugaran, pengontrol gim, dan perangkat IoT melalui Web Bluetooth API saat Anda memberinya izin.",
+                "it" : "Net Skip utilizza il Bluetooth affinché i siti web che visiti possano comunicare con dispositivi nelle vicinanze come fitness tracker, controller di gioco e dispositivi IoT tramite l’API Web Bluetooth quando concedi loro l’autorizzazione.",
+                "ja" : "Net Skipは、許可した場合に閲覧中のウェブサイトがWeb Bluetooth APIを介してフィットネストラッカー、ゲームコントローラ、IoTデバイスなど近くのデバイスと通信できるようにBluetoothを使用します。",
+                "ko" : "Net Skip는 사용자가 권한을 허용하면 방문한 웹사이트가 Web Bluetooth API를 통해 피트니스 트래커, 게임 컨트롤러, IoT 기기 등 주변 기기와 통신할 수 있도록 블루투스를 사용합니다.",
+                "pt-BR" : "O Net Skip usa Bluetooth para que os sites visitados possam se comunicar com dispositivos próximos, como monitores de atividades, controles de jogos e dispositivos IoT, pela API Web Bluetooth quando você conceder permissão.",
+                "ru" : "Net Skip использует Bluetooth, чтобы посещаемые сайты могли с вашего разрешения взаимодействовать с находящимися рядом устройствами — фитнес-трекерами, игровыми контроллерами и оборудованием IoT — через Web Bluetooth API.",
+                "zh-Hans" : "Net Skip 使用蓝牙，以便您访问的网站在您授权后可通过 Web Bluetooth API 与健身追踪器、游戏手柄和 IoT 设备等附近设备通信。"
+              },
+              "key" : "NSBluetoothAlwaysUsageDescription"
+            },
+            {
+              "description" : {
+                "ar" : "يحتاج Net Skip إلى الوصول إلى تقويمك حتى تتمكن المواقع التي تزورها من إضافة أحداث مثل الحجوزات والمواعيد ودعوات الاجتماعات عند منحها الإذن.",
+                "de" : "Net Skip benötigt Zugriff auf deinen Kalender, damit besuchte Websites mit deiner Erlaubnis Termine wie Buchungen, Reservierungen und Besprechungseinladungen hinzufügen können.",
+                "en" : "Net Skip needs access to your calendar so that websites you visit can add events such as bookings, reservations, and meeting invitations when you grant them permission.",
+                "es" : "Net Skip necesita acceder a tu calendario para que los sitios web que visitas puedan añadir eventos como reservas, citas e invitaciones a reuniones cuando les concedes permiso.",
+                "fr" : "Net Skip a besoin d’accéder à votre calendrier pour permettre aux sites web que vous consultez d’ajouter, avec votre autorisation, des événements tels que des réservations, des rendez-vous et des invitations à des réunions.",
+                "hi" : "Net Skip को आपके कैलेंडर तक पहुँच की आवश्यकता है ताकि जिन वेबसाइटों पर आप जाते हैं वे आपकी अनुमति देने पर बुकिंग, आरक्षण और मीटिंग आमंत्रण जैसे ईवेंट जोड़ सकें।",
+                "id" : "Net Skip memerlukan akses ke kalender Anda agar situs web yang Anda kunjungi dapat menambahkan acara seperti pemesanan, reservasi, dan undangan rapat saat Anda memberinya izin.",
+                "it" : "Net Skip necessita dell’accesso al tuo calendario affinché i siti web che visiti possano aggiungere eventi come prenotazioni, appuntamenti e inviti a riunioni quando concedi loro l’autorizzazione.",
+                "ja" : "Net Skipは、許可した場合に閲覧中のウェブサイトが予約や会議の招待などの予定をカレンダーに追加できるよう、カレンダーへのアクセスを必要とします。",
+                "ko" : "Net Skip는 사용자가 권한을 허용하면 방문한 웹사이트가 예약, 일정, 회의 초대 등의 이벤트를 추가할 수 있도록 캘린더 접근 권한이 필요합니다.",
+                "pt-BR" : "O Net Skip precisa acessar seu calendário para que os sites visitados possam adicionar eventos como reservas, agendamentos e convites de reuniões quando você conceder permissão.",
+                "ru" : "Net Skip требуется доступ к вашему календарю, чтобы посещаемые сайты могли с вашего разрешения добавлять события — бронирования, встречи и приглашения на совещания.",
+                "zh-Hans" : "Net Skip 需要访问您的日历，以便您访问的网站在您授权后可添加预订、预约和会议邀请等事件。"
+              },
+              "key" : "NSCalendarsUsageDescription"
+            },
+            {
+              "description" : {
+                "ar" : "يحتاج Net Skip إلى الوصول إلى الكاميرا حتى تتمكن المواقع التي تزورها من استخدامها لمكالمات الفيديو ومسح رموز QR والتقاط الصور عند منحها الإذن.",
+                "de" : "Net Skip benötigt Zugriff auf deine Kamera, damit besuchte Websites sie mit deiner Erlaubnis für Videoanrufe, das Scannen von QR-Codes und das Aufnehmen von Fotos verwenden können.",
+                "en" : "Net Skip needs access to your camera so that websites you visit can use it for video calls, scanning QR codes, and capturing photos when you grant them permission.",
+                "es" : "Net Skip necesita acceder a tu cámara para que los sitios web que visitas puedan usarla para videollamadas, escanear códigos QR y hacer fotos cuando les concedes permiso.",
+                "fr" : "Net Skip a besoin d’accéder à votre caméra afin que les sites web que vous consultez puissent l’utiliser, avec votre autorisation, pour les appels vidéo, la lecture de codes QR et la prise de photos.",
+                "hi" : "Net Skip को आपके कैमरे तक पहुँच की आवश्यकता है ताकि जिन वेबसाइटों पर आप जाते हैं वे आपकी अनुमति देने पर वीडियो कॉल, QR कोड स्कैन और फ़ोटो खींचने के लिए इसका उपयोग कर सकें।",
+                "id" : "Net Skip memerlukan akses ke kamera Anda agar situs web yang Anda kunjungi dapat menggunakannya untuk panggilan video, memindai kode QR, dan mengambil foto saat Anda memberinya izin.",
+                "it" : "Net Skip necessita dell’accesso alla tua fotocamera affinché i siti web che visiti possano usarla per videochiamate, scansione di codici QR e scatto di foto quando concedi loro l’autorizzazione.",
+                "ja" : "Net Skipは、許可した場合に閲覧中のウェブサイトがビデオ通話、QRコードのスキャン、写真撮影に利用できるよう、カメラへのアクセスを必要とします。",
+                "ko" : "Net Skip는 사용자가 권한을 허용하면 방문한 웹사이트가 영상 통화, QR 코드 스캔, 사진 촬영에 사용할 수 있도록 카메라 접근 권한이 필요합니다.",
+                "pt-BR" : "O Net Skip precisa acessar sua câmera para que os sites visitados possam usá-la em chamadas de vídeo, leitura de códigos QR e captura de fotos quando você conceder permissão.",
+                "ru" : "Net Skip требуется доступ к камере, чтобы посещаемые сайты могли с вашего разрешения использовать её для видеозвонков, сканирования QR-кодов и съёмки фотографий.",
+                "zh-Hans" : "Net Skip 需要访问您的相机，以便您访问的网站在您授权后可用于视频通话、扫描二维码和拍摄照片。"
+              },
+              "key" : "NSCameraUsageDescription"
+            },
+            {
+              "description" : {
+                "ar" : "يحتاج Net Skip إلى الوصول إلى جهات اتصالك حتى تتمكن من ملء الأسماء وعناوين البريد الإلكتروني وأرقام الهواتف تلقائياً في نماذج الويب.",
+                "de" : "Net Skip benötigt Zugriff auf deine Kontakte, damit du Namen, E-Mail-Adressen und Telefonnummern schnell automatisch in Webformulare eintragen kannst.",
+                "en" : "Net Skip needs access to your contacts so that you can quickly autofill names, email addresses, and phone numbers into web forms.",
+                "es" : "Net Skip necesita acceder a tus contactos para que puedas autocompletar rápidamente nombres, direcciones de correo y números de teléfono en formularios web.",
+                "fr" : "Net Skip a besoin d’accéder à vos contacts pour vous permettre de remplir rapidement et automatiquement noms, adresses e-mail et numéros de téléphone dans les formulaires web.",
+                "hi" : "Net Skip को आपके संपर्कों तक पहुँच की आवश्यकता है ताकि आप वेब फ़ॉर्म में नाम, ईमेल पते और फ़ोन नंबर शीघ्रता से ऑटोफ़िल कर सकें।",
+                "id" : "Net Skip memerlukan akses ke kontak Anda agar Anda dapat mengisi nama, alamat email, dan nomor telepon di formulir web secara otomatis dengan cepat.",
+                "it" : "Net Skip necessita dell’accesso ai tuoi contatti per consentirti di compilare automaticamente nomi, indirizzi e-mail e numeri di telefono nei moduli web.",
+                "ja" : "Net Skipは、Webフォームに名前、メールアドレス、電話番号をすばやく自動入力できるよう、連絡先へのアクセスを必要とします。",
+                "ko" : "Net Skip는 웹 양식에 이름, 이메일 주소, 전화번호를 빠르게 자동 입력할 수 있도록 연락처 접근 권한이 필요합니다.",
+                "pt-BR" : "O Net Skip precisa acessar seus contatos para que você possa preencher automaticamente nomes, endereços de e-mail e números de telefone em formulários da web.",
+                "ru" : "Net Skip требуется доступ к вашим контактам, чтобы быстро автоматически подставлять имена, адреса электронной почты и номера телефонов в веб-формы.",
+                "zh-Hans" : "Net Skip 需要访问您的通讯录，以便您可以在网页表单中快速自动填写姓名、电子邮件地址和电话号码。"
+              },
+              "key" : "NSContactsUsageDescription"
+            },
+            {
+              "description" : {
+                "ar" : "يستخدم Net Skip ميزة Face ID لفتح جلسات التصفح الخاص وتعبئة كلمات المرور المحفوظة بأمان عند تسجيل الدخول إلى المواقع.",
+                "de" : "Net Skip verwendet Face ID, um private Browsersitzungen zu entsperren und gespeicherte Passwörter beim Anmelden bei Websites sicher automatisch auszufüllen.",
+                "en" : "Net Skip uses Face ID to unlock private browsing sessions and to securely autofill saved passwords when signing in to websites.",
+                "es" : "Net Skip usa Face ID para desbloquear sesiones de navegación privada y autocompletar de forma segura las contraseñas guardadas al iniciar sesión en sitios web.",
+                "fr" : "Net Skip utilise Face ID pour déverrouiller les sessions de navigation privée et remplir automatiquement et en toute sécurité les mots de passe enregistrés lors de la connexion aux sites web.",
+                "hi" : "Net Skip निजी ब्राउज़िंग सत्रों को अनलॉक करने और वेबसाइटों में साइन इन करते समय सहेजे गए पासवर्ड सुरक्षित रूप से ऑटोफ़िल करने के लिए Face ID का उपयोग करता है।",
+                "id" : "Net Skip menggunakan Face ID untuk membuka sesi penjelajahan pribadi dan mengisi otomatis kata sandi tersimpan dengan aman saat masuk ke situs web.",
+                "it" : "Net Skip utilizza Face ID per sbloccare le sessioni di navigazione privata e compilare automaticamente in modo sicuro le password salvate al momento dell’accesso ai siti web.",
+                "ja" : "Net Skipは、プライベートブラウズセッションのロック解除や、ウェブサイトへのサインイン時に保存されたパスワードを安全に自動入力するためにFace IDを使用します。",
+                "ko" : "Net Skip는 비공개 탐색 세션을 잠금 해제하고 웹사이트 로그인 시 저장된 비밀번호를 안전하게 자동 입력하기 위해 Face ID를 사용합니다.",
+                "pt-BR" : "O Net Skip usa o Face ID para desbloquear sessões de navegação privada e preencher automaticamente, com segurança, as senhas salvas ao entrar em sites.",
+                "ru" : "Net Skip использует Face ID для разблокировки приватных сеансов просмотра и безопасной автоматической подстановки сохранённых паролей при входе на сайты.",
+                "zh-Hans" : "Net Skip 使用面容 ID 解锁隐私浏览会话，并在登录网站时安全地自动填充已保存的密码。"
+              },
+              "key" : "NSFaceIDUsageDescription"
+            },
+            {
+              "description" : {
+                "ar" : "يحتاج Net Skip إلى الوصول إلى HomeKit حتى تتمكن المواقع التي تزورها من التفاعل مع ملحقات المنزل الذكي المتوافقة عند منحها الإذن.",
+                "de" : "Net Skip benötigt Zugriff auf HomeKit, damit besuchte Websites mit deiner Erlaubnis mit kompatiblem Smart-Home-Zubehör interagieren können.",
+                "en" : "Net Skip needs access to HomeKit so that websites you visit can interact with compatible smart home accessories when you grant them permission.",
+                "es" : "Net Skip necesita acceder a HomeKit para que los sitios web que visitas puedan interactuar con accesorios de hogar inteligente compatibles cuando les concedes permiso.",
+                "fr" : "Net Skip a besoin d’accéder à HomeKit pour permettre aux sites web que vous consultez d’interagir, avec votre autorisation, avec des accessoires domotiques compatibles.",
+                "hi" : "Net Skip को HomeKit तक पहुँच की आवश्यकता है ताकि जिन वेबसाइटों पर आप जाते हैं वे आपकी अनुमति देने पर संगत स्मार्ट होम सहायक उपकरणों के साथ इंटरैक्ट कर सकें।",
+                "id" : "Net Skip memerlukan akses ke HomeKit agar situs web yang Anda kunjungi dapat berinteraksi dengan aksesori rumah pintar yang kompatibel saat Anda memberinya izin.",
+                "it" : "Net Skip necessita dell’accesso a HomeKit affinché i siti web che visiti possano interagire con gli accessori per la casa intelligente compatibili quando concedi loro l’autorizzazione.",
+                "ja" : "Net Skipは、許可した場合に閲覧中のウェブサイトが対応するスマートホームアクセサリと連携できるよう、HomeKitへのアクセスを必要とします。",
+                "ko" : "Net Skip는 사용자가 권한을 허용하면 방문한 웹사이트가 호환되는 스마트 홈 액세서리와 상호작용할 수 있도록 HomeKit 접근 권한이 필요합니다.",
+                "pt-BR" : "O Net Skip precisa acessar o HomeKit para que os sites visitados possam interagir com acessórios de casa inteligente compatíveis quando você conceder permissão.",
+                "ru" : "Net Skip требуется доступ к HomeKit, чтобы посещаемые сайты могли с вашего разрешения взаимодействовать с совместимыми аксессуарами умного дома.",
+                "zh-Hans" : "Net Skip 需要访问 HomeKit，以便您访问的网站在您授权后可与兼容的智能家居配件交互。"
+              },
+              "key" : "NSHomeKitUsageDescription"
+            },
+            {
+              "description" : {
+                "ar" : "يستخدم Net Skip موقعك لتوفير ميزات تعتمد على الموقع للمواقع التي تزورها، بما في ذلك التحديثات المستمرة لصفحات الملاحة والخرائط عند منحها الإذن.",
+                "de" : "Net Skip verwendet deinen Standort, um besuchten Websites standortbezogene Funktionen bereitzustellen, einschließlich fortlaufender Aktualisierungen für Navigations- und Kartenseiten, sofern du dies erlaubst.",
+                "en" : "Net Skip uses your location to provide location-aware features to websites you visit, including continuous updates for navigation and mapping pages when you grant them permission.",
+                "es" : "Net Skip usa tu ubicación para ofrecer funciones basadas en la ubicación a los sitios web que visitas, incluidas actualizaciones continuas para páginas de navegación y mapas cuando les concedes permiso.",
+                "fr" : "Net Skip utilise votre position pour fournir des fonctionnalités géolocalisées aux sites web que vous consultez, y compris des mises à jour continues pour les pages de navigation et de cartographie, lorsque vous leur en accordez l’autorisation.",
+                "hi" : "Net Skip आपके स्थान का उपयोग उन वेबसाइटों को स्थान-आधारित सुविधाएँ प्रदान करने के लिए करता है जिन पर आप जाते हैं, जिसमें आपकी अनुमति देने पर नेविगेशन और मानचित्र पृष्ठों के लिए निरंतर अपडेट शामिल हैं।",
+                "id" : "Net Skip menggunakan lokasi Anda untuk menyediakan fitur berbasis lokasi pada situs web yang Anda kunjungi, termasuk pembaruan berkelanjutan untuk halaman navigasi dan peta saat Anda memberinya izin.",
+                "it" : "Net Skip utilizza la tua posizione per fornire funzionalità basate sulla posizione ai siti web che visiti, inclusi aggiornamenti continui per le pagine di navigazione e mappe quando concedi loro l’autorizzazione.",
+                "ja" : "Net Skipは、許可した場合に閲覧中のウェブサイトに位置情報機能を提供し、ナビゲーションや地図のページで継続的な位置情報の更新を行うため、位置情報を使用します。",
+                "ko" : "Net Skip는 사용자가 권한을 허용하면 방문한 웹사이트에 위치 기반 기능을 제공하며, 내비게이션 및 지도 페이지에서 위치 정보를 지속적으로 업데이트합니다.",
+                "pt-BR" : "O Net Skip usa sua localização para oferecer recursos baseados em localização aos sites visitados, incluindo atualizações contínuas para páginas de navegação e mapas quando você conceder permissão.",
+                "ru" : "Net Skip использует ваше местоположение для предоставления функций на основе местоположения сайтам, которые вы посещаете, включая непрерывное обновление для страниц навигации и карт с вашего разрешения.",
+                "zh-Hans" : "Net Skip 使用您的位置为您访问的网站提供基于位置的功能，包括在您授权后为导航和地图页面持续更新位置信息。"
+              },
+              "key" : "NSLocationAlwaysAndWhenInUseUsageDescription"
+            },
+            {
+              "description" : {
+                "ar" : "يستخدم Net Skip موقعك لتوفير ميزات تعتمد على الموقع للمواقع التي تزورها، مثل الخرائط ونتائج البحث المحلية ومعلومات الطقس عند منحها الإذن.",
+                "de" : "Net Skip verwendet deinen Standort, um besuchten Websites standortbezogene Funktionen wie Karten, lokale Suchergebnisse und Wetterinformationen bereitzustellen, sofern du dies erlaubst.",
+                "en" : "Net Skip uses your location to provide location-aware features to websites you visit, such as maps, local search results, and weather information when you grant them permission.",
+                "es" : "Net Skip usa tu ubicación para ofrecer funciones basadas en la ubicación a los sitios web que visitas, como mapas, resultados de búsqueda local e información meteorológica cuando les concedes permiso.",
+                "fr" : "Net Skip utilise votre position pour fournir des fonctionnalités géolocalisées aux sites web que vous consultez, telles que cartes, résultats de recherche locale et informations météo, lorsque vous leur en accordez l’autorisation.",
+                "hi" : "Net Skip आपके स्थान का उपयोग उन वेबसाइटों को स्थान-आधारित सुविधाएँ प्रदान करने के लिए करता है जिन पर आप जाते हैं, जैसे आपकी अनुमति देने पर मानचित्र, स्थानीय खोज परिणाम और मौसम की जानकारी।",
+                "id" : "Net Skip menggunakan lokasi Anda untuk menyediakan fitur berbasis lokasi pada situs web yang Anda kunjungi, seperti peta, hasil pencarian lokal, dan informasi cuaca saat Anda memberinya izin.",
+                "it" : "Net Skip utilizza la tua posizione per fornire funzionalità basate sulla posizione ai siti web che visiti, come mappe, risultati di ricerca locale e informazioni meteo quando concedi loro l’autorizzazione.",
+                "ja" : "Net Skipは、許可した場合に閲覧中のウェブサイトに地図、近隣の検索結果、天気情報などの位置情報機能を提供するために位置情報を使用します。",
+                "ko" : "Net Skip는 사용자가 권한을 허용하면 방문한 웹사이트에 지도, 지역 검색 결과, 날씨 정보 등 위치 기반 기능을 제공하기 위해 위치를 사용합니다.",
+                "pt-BR" : "O Net Skip usa sua localização para oferecer recursos baseados em localização aos sites visitados, como mapas, resultados de buscas locais e informações do tempo quando você conceder permissão.",
+                "ru" : "Net Skip использует ваше местоположение для предоставления функций на основе местоположения сайтам, которые вы посещаете, например карт, результатов локального поиска и сведений о погоде с вашего разрешения.",
+                "zh-Hans" : "Net Skip 使用您的位置为您访问的网站提供基于位置的功能，例如在您授权后提供地图、本地搜索结果和天气信息。"
+              },
+              "key" : "NSLocationWhenInUseUsageDescription"
+            },
+            {
+              "description" : {
+                "ar" : "يحتاج Net Skip إلى الوصول إلى الميكروفون حتى تتمكن المواقع التي تزورها من استخدامه للمكالمات الصوتية والمرئية والبحث الصوتي وتسجيل الصوت عند منحها الإذن.",
+                "de" : "Net Skip benötigt Zugriff auf dein Mikrofon, damit besuchte Websites es mit deiner Erlaubnis für Sprach- und Videoanrufe, Sprachsuche und Audioaufnahmen verwenden können.",
+                "en" : "Net Skip needs access to your microphone so that websites you visit can use it for voice and video calls, voice search, and recording audio when you grant them permission.",
+                "es" : "Net Skip necesita acceder a tu micrófono para que los sitios web que visitas puedan usarlo en llamadas de voz y vídeo, búsqueda por voz y grabación de audio cuando les concedes permiso.",
+                "fr" : "Net Skip a besoin d’accéder à votre microphone afin que les sites web que vous consultez puissent l’utiliser, avec votre autorisation, pour les appels audio et vidéo, la recherche vocale et l’enregistrement audio.",
+                "hi" : "Net Skip को आपके माइक्रोफ़ोन तक पहुँच की आवश्यकता है ताकि जिन वेबसाइटों पर आप जाते हैं वे आपकी अनुमति देने पर इसका उपयोग वॉइस और वीडियो कॉल, वॉइस सर्च और ऑडियो रिकॉर्डिंग के लिए कर सकें।",
+                "id" : "Net Skip memerlukan akses ke mikrofon Anda agar situs web yang Anda kunjungi dapat menggunakannya untuk panggilan suara dan video, pencarian suara, serta merekam audio saat Anda memberinya izin.",
+                "it" : "Net Skip necessita dell’accesso al microfono affinché i siti web che visiti possano usarlo per chiamate vocali e video, ricerca vocale e registrazione audio quando concedi loro l’autorizzazione.",
+                "ja" : "Net Skipは、許可した場合に閲覧中のウェブサイトが音声・ビデオ通話、音声検索、音声録音に利用できるよう、マイクへのアクセスを必要とします。",
+                "ko" : "Net Skip는 사용자가 권한을 허용하면 방문한 웹사이트가 음성·영상 통화, 음성 검색, 오디오 녹음에 사용할 수 있도록 마이크 접근 권한이 필요합니다.",
+                "pt-BR" : "O Net Skip precisa acessar seu microfone para que os sites visitados possam usá-lo em chamadas de voz e vídeo, busca por voz e gravação de áudio quando você conceder permissão.",
+                "ru" : "Net Skip требуется доступ к микрофону, чтобы посещаемые сайты могли с вашего разрешения использовать его для голосовых и видеозвонков, голосового поиска и записи аудио.",
+                "zh-Hans" : "Net Skip 需要访问您的麦克风，以便您访问的网站在您授权后可用于语音和视频通话、语音搜索和录制音频。"
+              },
+              "key" : "NSMicrophoneUsageDescription"
+            },
+            {
+              "description" : {
+                "ar" : "يستخدم Net Skip بيانات الحركة والاتجاه حتى تتمكن المواقع التي تزورها من تقديم تجارب تفاعلية تستجيب لطريقة تحريك وإمالة جهازك عند منحها الإذن.",
+                "de" : "Net Skip nutzt Bewegungs- und Orientierungsdaten, damit besuchte Websites mit deiner Erlaubnis interaktive Erlebnisse bieten können, die auf das Bewegen und Neigen deines Geräts reagieren.",
+                "en" : "Net Skip uses motion and orientation data so that websites you visit can offer interactive experiences that respond to how you move and tilt your device when you grant them permission.",
+                "es" : "Net Skip utiliza datos de movimiento y orientación para que los sitios web que visitas puedan ofrecer experiencias interactivas que respondan a cómo mueves e inclinas el dispositivo cuando les concedes permiso.",
+                "fr" : "Net Skip utilise les données de mouvement et d’orientation afin que les sites web que vous consultez puissent proposer des expériences interactives réagissant à la façon dont vous bougez et inclinez votre appareil, lorsque vous leur en accordez l’autorisation.",
+                "hi" : "Net Skip गति और दिशा डेटा का उपयोग करता है ताकि जिन वेबसाइटों पर आप जाते हैं वे आपकी अनुमति देने पर आपके डिवाइस को हिलाने और झुकाने के तरीके पर प्रतिक्रिया देने वाले इंटरैक्टिव अनुभव प्रदान कर सकें।",
+                "id" : "Net Skip menggunakan data gerak dan orientasi agar situs web yang Anda kunjungi dapat menyajikan pengalaman interaktif yang merespons cara Anda menggerakkan dan memiringkan perangkat saat Anda memberinya izin.",
+                "it" : "Net Skip utilizza i dati di movimento e orientamento affinché i siti web che visiti possano offrire esperienze interattive che rispondono al modo in cui muovi e inclini il tuo dispositivo quando concedi loro l’autorizzazione.",
+                "ja" : "Net Skipは、許可した場合に閲覧中のウェブサイトがデバイスの動きや傾きに反応するインタラクティブな体験を提供できるよう、モーションおよび方向データを使用します。",
+                "ko" : "Net Skip는 사용자가 권한을 허용하면 방문한 웹사이트가 기기의 움직임과 기울임에 반응하는 인터랙티브 경험을 제공할 수 있도록 모션 및 방향 데이터를 사용합니다.",
+                "pt-BR" : "O Net Skip usa dados de movimento e orientação para que os sites visitados possam oferecer experiências interativas que respondem à forma como você move e inclina o dispositivo quando você conceder permissão.",
+                "ru" : "Net Skip использует данные движения и ориентации, чтобы посещаемые сайты могли с вашего разрешения предлагать интерактивные функции, реагирующие на то, как вы двигаете и наклоняете устройство.",
+                "zh-Hans" : "Net Skip 使用动作和方向数据，以便您访问的网站在您授权后可提供能响应设备移动和倾斜的互动体验。"
+              },
+              "key" : "NSMotionUsageDescription"
+            },
+            {
+              "description" : {
+                "ar" : "يستخدم Net Skip ميزة التفاعل القريب حتى تتمكن من مشاركة علامات التبويب المفتوحة والروابط بأمان مع أجهزة Apple الأخرى القريبة منك جسدياً.",
+                "de" : "Net Skip nutzt die Nahinteraktion, damit du geöffnete Tabs und Links sicher mit anderen Apple-Geräten in deiner unmittelbaren Nähe teilen kannst.",
+                "en" : "Net Skip uses nearby interaction so that you can securely share open tabs and links with other Apple devices that are physically close to yours.",
+                "es" : "Net Skip usa la interacción cercana para que puedas compartir de forma segura pestañas abiertas y enlaces con otros dispositivos Apple que estén cerca físicamente.",
+                "fr" : "Net Skip utilise l’interaction à proximité pour vous permettre de partager en toute sécurité des onglets ouverts et des liens avec d’autres appareils Apple physiquement proches.",
+                "hi" : "Net Skip निकट इंटरैक्शन का उपयोग करता है ताकि आप खुले टैब और लिंक को अपने पास भौतिक रूप से मौजूद अन्य Apple डिवाइसों के साथ सुरक्षित रूप से साझा कर सकें।",
+                "id" : "Net Skip menggunakan Interaksi Dekat agar Anda dapat membagikan tab dan tautan terbuka dengan aman ke perangkat Apple lain yang berada di dekat Anda secara fisik.",
+                "it" : "Net Skip utilizza l’interazione ravvicinata per consentirti di condividere in modo sicuro schede e link aperti con altri dispositivi Apple fisicamente vicini.",
+                "ja" : "Net Skipは、開いているタブやリンクを物理的に近くにある他のAppleデバイスと安全に共有できるよう、近接インタラクションを使用します。",
+                "ko" : "Net Skip는 물리적으로 가까이 있는 다른 Apple 기기와 열린 탭과 링크를 안전하게 공유할 수 있도록 근접 상호 작용을 사용합니다.",
+                "pt-BR" : "O Net Skip usa a interação por proximidade para que você possa compartilhar com segurança abas abertas e links com outros dispositivos Apple fisicamente próximos.",
+                "ru" : "Net Skip использует ближнее взаимодействие, чтобы вы могли безопасно делиться открытыми вкладками и ссылками с другими устройствами Apple, расположенными физически рядом.",
+                "zh-Hans" : "Net Skip 使用近距离互动，以便您可以与附近的其他 Apple 设备安全地共享打开的标签页和链接。"
+              },
+              "key" : "NSNearbyInteractionUsageDescription"
+            },
+            {
+              "description" : {
+                "ar" : "يحتاج Net Skip إلى الوصول إلى مكتبة الصور حتى تتمكن من تحميل الصور إلى المواقع وحفظ الصور والوسائط الأخرى من صفحات الويب التي تزورها.",
+                "de" : "Net Skip benötigt Zugriff auf deine Fotomediathek, damit du Bilder auf Websites hochladen und Fotos sowie andere Medien von besuchten Webseiten speichern kannst.",
+                "en" : "Net Skip needs access to your photo library so that you can upload images to websites and save pictures and other media from web pages you visit.",
+                "es" : "Net Skip necesita acceder a tu fototeca para que puedas subir imágenes a sitios web y guardar fotos y otros archivos multimedia de las páginas web que visitas.",
+                "fr" : "Net Skip a besoin d’accéder à votre photothèque pour vous permettre de téléverser des images vers des sites web et d’enregistrer photos et autres médias depuis les pages web que vous consultez.",
+                "hi" : "Net Skip को आपकी फ़ोटो लाइब्रेरी तक पहुँच की आवश्यकता है ताकि आप वेबसाइटों पर छवियाँ अपलोड कर सकें और देखी गई वेब पृष्ठों से चित्र और अन्य मीडिया सहेज सकें।",
+                "id" : "Net Skip memerlukan akses ke pustaka foto Anda agar Anda dapat mengunggah gambar ke situs web dan menyimpan foto serta media lain dari halaman web yang Anda kunjungi.",
+                "it" : "Net Skip necessita dell’accesso alla libreria foto per consentirti di caricare immagini sui siti web e salvare foto e altri contenuti multimediali dalle pagine web che visiti.",
+                "ja" : "Net Skipは、ウェブサイトに画像をアップロードしたり、閲覧中のウェブページから写真などのメディアを保存できるよう、写真ライブラリへのアクセスを必要とします。",
+                "ko" : "Net Skip는 웹사이트에 이미지를 업로드하고 방문한 웹페이지에서 사진 및 기타 미디어를 저장할 수 있도록 사진 보관함 접근 권한이 필요합니다.",
+                "pt-BR" : "O Net Skip precisa acessar sua biblioteca de fotos para que você possa enviar imagens para sites e salvar fotos e outras mídias das páginas que visita.",
+                "ru" : "Net Skip требуется доступ к медиатеке, чтобы вы могли загружать изображения на сайты и сохранять фотографии и другие медиафайлы со страниц, которые вы посещаете.",
+                "zh-Hans" : "Net Skip 需要访问您的照片图库，以便您可以将图片上传到网站，并从访问的网页中保存图片和其他媒体。"
+              },
+              "key" : "NSPhotoLibraryUsageDescription"
+            },
+            {
+              "description" : {
+                "ar" : "يحتاج Net Skip إلى الوصول إلى التذكيرات حتى تتمكن من إنشاء مهام من صفحات الويب وحتى يمكن للمواقع إضافة تذكيرات عند منحها الإذن.",
+                "de" : "Net Skip benötigt Zugriff auf deine Erinnerungen, damit du Aufgaben aus Webseiten erstellen kannst und besuchte Websites mit deiner Erlaubnis Erinnerungen hinzufügen können.",
+                "en" : "Net Skip needs access to your reminders so that you can create tasks from web pages and so that websites can add reminders when you grant them permission.",
+                "es" : "Net Skip necesita acceder a tus recordatorios para que puedas crear tareas desde páginas web y para que los sitios web puedan añadir recordatorios cuando les concedes permiso.",
+                "fr" : "Net Skip a besoin d’accéder à vos rappels pour vous permettre de créer des tâches depuis des pages web et permettre aux sites web d’ajouter des rappels lorsque vous leur en accordez l’autorisation.",
+                "hi" : "Net Skip को आपके अनुस्मारकों तक पहुँच की आवश्यकता है ताकि आप वेब पृष्ठों से कार्य बना सकें और वेबसाइटें आपकी अनुमति देने पर अनुस्मारक जोड़ सकें।",
+                "id" : "Net Skip memerlukan akses ke pengingat Anda agar Anda dapat membuat tugas dari halaman web dan agar situs web dapat menambahkan pengingat saat Anda memberinya izin.",
+                "it" : "Net Skip necessita dell’accesso ai promemoria per consentirti di creare attività dalle pagine web e ai siti web di aggiungere promemoria quando concedi loro l’autorizzazione.",
+                "ja" : "Net Skipは、ウェブページからタスクを作成したり、許可した場合にウェブサイトがリマインダーを追加できるよう、リマインダーへのアクセスを必要とします。",
+                "ko" : "Net Skip는 웹페이지에서 할 일을 만들 수 있도록, 그리고 사용자가 권한을 허용한 웹사이트가 미리 알림을 추가할 수 있도록 미리 알림 접근 권한이 필요합니다.",
+                "pt-BR" : "O Net Skip precisa acessar seus lembretes para que você possa criar tarefas a partir de páginas da web e para que os sites possam adicionar lembretes quando você conceder permissão.",
+                "ru" : "Net Skip требуется доступ к напоминаниям, чтобы вы могли создавать задачи из веб-страниц, а сайты могли с вашего разрешения добавлять напоминания.",
+                "zh-Hans" : "Net Skip 需要访问您的提醒事项，以便您可以从网页创建任务，并允许已授权的网站添加提醒事项。"
+              },
+              "key" : "NSRemindersUsageDescription"
+            },
+            {
+              "description" : {
+                "ar" : "يتكامل Net Skip مع Siri حتى تتمكن من فتح صفحات الويب وإجراء عمليات البحث ومتابعة التصفح باستخدام اختصارات الصوت واقتراحات Siri.",
+                "de" : "Net Skip ist in Siri integriert, damit du Webseiten öffnen, Suchen durchführen und das Surfen über Sprachkurzbefehle und Siri-Vorschläge fortsetzen kannst.",
+                "en" : "Net Skip integrates with Siri so that you can open web pages, perform searches, and resume browsing using voice shortcuts and Siri Suggestions.",
+                "es" : "Net Skip se integra con Siri para que puedas abrir páginas web, realizar búsquedas y retomar la navegación mediante atajos de voz y sugerencias de Siri.",
+                "fr" : "Net Skip s’intègre à Siri pour vous permettre d’ouvrir des pages web, d’effectuer des recherches et de reprendre la navigation à l’aide des raccourcis vocaux et des suggestions Siri.",
+                "hi" : "Net Skip Siri के साथ एकीकृत होता है ताकि आप वॉइस शॉर्टकट और Siri सुझावों का उपयोग करके वेब पृष्ठ खोल सकें, खोज कर सकें और ब्राउज़िंग जारी रख सकें।",
+                "id" : "Net Skip terintegrasi dengan Siri agar Anda dapat membuka halaman web, melakukan pencarian, dan melanjutkan penjelajahan menggunakan pintasan suara dan Saran Siri.",
+                "it" : "Net Skip si integra con Siri per consentirti di aprire pagine web, eseguire ricerche e riprendere la navigazione tramite scorciatoie vocali e suggerimenti di Siri.",
+                "ja" : "Net Skipは、音声ショートカットやSiriからの提案を使ってウェブページを開いたり、検索を実行したり、ブラウズを再開できるようSiriと連携します。",
+                "ko" : "Net Skip는 음성 단축어와 Siri 제안을 통해 웹페이지를 열고, 검색하고, 탐색을 이어갈 수 있도록 Siri와 연동됩니다.",
+                "pt-BR" : "O Net Skip se integra à Siri para que você possa abrir páginas da web, realizar buscas e retomar a navegação usando atalhos de voz e Sugestões da Siri.",
+                "ru" : "Net Skip интегрируется с Siri, чтобы вы могли открывать веб-страницы, выполнять поиск и продолжать просмотр с помощью голосовых команд и предложений Siri.",
+                "zh-Hans" : "Net Skip 与 Siri 集成，以便您可以使用语音快捷指令和 Siri 建议打开网页、执行搜索并继续浏览。"
+              },
+              "key" : "NSSiriUsageDescription"
+            },
+            {
+              "description" : {
+                "ar" : "يستخدم Net Skip التعرف على الكلام حتى تتمكن من إملاء عناوين URL واستفسارات البحث ومدخلات النماذج صوتياً بدلاً من الكتابة.",
+                "de" : "Net Skip verwendet Spracherkennung, damit du URLs, Suchanfragen und Formulareingaben per Sprache diktieren kannst, statt sie einzutippen.",
+                "en" : "Net Skip uses speech recognition so that you can dictate URLs, search queries, and form input by voice instead of typing.",
+                "es" : "Net Skip usa el reconocimiento de voz para que puedas dictar URLs, consultas de búsqueda y entradas de formularios con la voz en lugar de escribir.",
+                "fr" : "Net Skip utilise la reconnaissance vocale afin que vous puissiez dicter des URL, des requêtes de recherche et des saisies de formulaires plutôt que de les taper.",
+                "hi" : "Net Skip स्पीच रिकग्निशन का उपयोग करता है ताकि आप टाइप करने के बजाय आवाज़ से URL, खोज प्रश्न और फ़ॉर्म इनपुट बोलकर दर्ज कर सकें।",
+                "id" : "Net Skip menggunakan pengenalan suara agar Anda dapat mendiktekan URL, kueri pencarian, dan masukan formulir lewat suara tanpa perlu mengetik.",
+                "it" : "Net Skip utilizza il riconoscimento vocale per consentirti di dettare URL, query di ricerca e dati nei moduli con la voce invece di digitarli.",
+                "ja" : "Net Skipは、URLや検索クエリ、フォームへの入力をタイピングの代わりに音声で行えるよう、音声認識を使用します。",
+                "ko" : "Net Skip는 키보드로 입력하는 대신 음성으로 URL, 검색어, 양식 내용을 받아쓸 수 있도록 음성 인식을 사용합니다.",
+                "pt-BR" : "O Net Skip usa o reconhecimento de fala para que você possa ditar URLs, buscas e entradas de formulário por voz em vez de digitar.",
+                "ru" : "Net Skip использует распознавание речи, чтобы вы могли диктовать URL-адреса, поисковые запросы и данные форм голосом вместо ввода текста.",
+                "zh-Hans" : "Net Skip 使用语音识别，以便您无需键入即可通过语音输入网址、搜索词和表单内容。"
+              },
+              "key" : "NSSpeechRecognitionUsageDescription"
+            }
+          ],
+          "subtitle" : {
+            "ar" : "متصفح ويب راقي",
+            "de" : "Ein humaner Web-Browser",
+            "en" : "A humane web browser",
+            "es" : "Un navegador web humano",
+            "fr" : "Un navigateur web humain",
+            "hi" : "ब्राउज़र",
+            "id" : "Peramban web yang humanis",
+            "it" : "Un browser web umano",
+            "ja" : "やさしいブラウザ",
+            "ko" : "인간적인 웹 브라우저",
+            "pt-BR" : "Um navegador web humano",
+            "ru" : "Удобный браузер",
+            "zh-Hans" : "人性化的网页浏览器"
+          },
+          "version" : "1.4.15"
+        }
+      },
+      "releaseNotes" : {
+        "ar" : "• العديد من إصلاحات الأخطاء وتحسينات الأداء.",
+        "de" : "• Zahlreiche Fehlerbehebungen und Leistungsverbesserungen.",
+        "en" : "• Many bug fixes and performance improvements.",
+        "es" : "• Numerosas correcciones de errores y mejoras de rendimiento.",
+        "fr" : "• De nombreuses corrections de bugs et améliorations des performances.",
+        "hi" : "• कई बग सुधार और प्रदर्शन में सुधार।",
+        "id" : "• Banyak perbaikan bug dan peningkatan performa.",
+        "it" : "• Numerose correzioni di bug e miglioramenti delle prestazioni.",
+        "ja" : "• 多数のバグ修正とパフォーマンスの向上。",
+        "ko" : "• 많은 버그 수정과 성능 개선이 있습니다.",
+        "pt-BR" : "• Diversas correções de bugs e melhorias de desempenho.",
+        "ru" : "• Множество исправлений ошибок и улучшений производительности.",
+        "zh-Hans" : "• 多项错误修复和性能改进。"
+      },
+      "source" : {
+        "assets" : "https://raw.githubusercontent.com/Net-Skip/Net-Skip/refs/tags/1.4.15/",
+        "license" : "GPL-2.0-only",
+        "release" : "https://github.com/Net-Skip/Net-Skip/releases/tag/1.4.15/",
+        "url" : "https://github.com/Net-Skip/Net-Skip.git"
+      },
+      "title" : {
+        "en" : "Net Skip"
+      }
+    }
+  ],
+  "generated" : "2026-05-02T20:19:07Z",
+  "generator" : "skip/1.8.11",
+  "specVersion" : "1.0"
+}
