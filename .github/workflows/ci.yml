@@ -15,8 +15,8 @@ jobs:
         with:
           path: appland
 
-      - name: Copy sample data into project root
-        run: cp -a appland/samples/* .
+      #- name: Copy sample data into project root
+        #run: cp -a appland/samples/* .
 
       - name: Build with Astro
         uses: withastro/action@v6
