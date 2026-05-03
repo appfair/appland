@@ -17,6 +17,15 @@ site/
 The template reads `../siteinfo.yaml` at build time. `siteinfo.yaml.appindex`
 points at the project's `appindex.json` (relative to `siteinfo.yaml`).
 
+The `appindex.json` file is expected to conform to the [App Fair appindex
+schema](https://appfair.org/schemas/appindex/), with the JSON Schema
+available at <https://appfair.org/schemas/appindex/v1.json>.
+
+For a live example, <https://netskip.app> is generated from
+<https://github.com/Net-Skip/Net-Skip/releases/latest/download/appindex.json>
+using the workflow at
+<https://github.com/Net-Skip/Net-Skip/blob/main/.github/workflows/website.yml>.
+
 ## Develop
 
 ```sh
