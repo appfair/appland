@@ -28,12 +28,20 @@ const GOOGLE_BADGE = `/badges/${badgeLocale(locale.code, 'google')}/google-play-
       rel="noopener"
       aria-label="Download on the App Store"
     >
+      {/*
+        Apple's SVG viewBox is tight to the artwork (≈120×40), while
+        Google's leaves ~50% extra "clear space" padding around the
+        badge artwork. To make both badges look the same size on the
+        page we render Apple a bit smaller and pad it with the same
+        amount of margin Google's built-in padding produces, so the
+        visible artwork heights match and the bounding boxes align.
+      */}
       <img
         src={APPLE_BADGE}
         alt="Download on the App Store"
-        width="156"
-        height="52"
-        class="h-12 sm:h-14 w-auto"
+        width="120"
+        height="40"
+        class="h-12 sm:h-14 w-auto mx-3 my-3"
         loading="lazy"
       />
     </a>
@@ -46,12 +54,21 @@ const GOOGLE_BADGE = `/badges/${badgeLocale(locale.code, 'google')}/google-play-
       rel="noopener"
       aria-label="Get it on Google Play"
     >
+      {/*
+        Google's SVG viewBox is 155×60 — the artwork itself only fills
+        ~40 of the 60 vertical units, with the rest being the "clear
+        space" Google's brand guidelines require around the badge. We
+        render the SVG at ~1.5× Apple's height (72/84px instead of
+        48/56px) so the visible artwork matches; the surrounding
+        padding inside the SVG is what the Apple badge mirrors with
+        its mx-3/my-3 margins.
+      */}
       <img
         src={GOOGLE_BADGE}
         alt="Get it on Google Play"
-        width="180"
-        height="52"
-        class="h-12 sm:h-14 w-auto"
+        width="155"
+        height="60"
+        class="h-[72px] sm:h-[84px] w-auto"
         loading="lazy"
       />
     </a>

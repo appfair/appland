@@ -1,5 +1,6 @@
 ---
 import type { PlatformView } from '../lib/types.ts';
+import { sanitizeDescription } from '../lib/html.ts';
 
 interface Props {
   view: PlatformView;
@@ -7,17 +8,25 @@ interface Props {
 }
 
 const { view, i18n } = Astro.props;
+
+// Google Play permits a small subset of HTML in description / release-notes
+// fields (<b>, <i>, <u>, <br>, <a>); Apple disallows it entirely. The
+// sanitizer renders whitelisted tags as real markup and escapes everything
+// else, so plain-text Apple descriptions and Google's mild markup both
+// render correctly.
+const descriptionHTML = sanitizeDescription(view.description);
+const releaseNotesHTML = sanitizeDescription(view.releaseNotes);
 ---
 
 <section class="space-y-6">
-  {view.description && (
+  {descriptionHTML && (
     <div class="space-y-3">
       <h2 class="text-xl sm:text-2xl font-semibold tracking-tight">{i18n.aboutHeading}</h2>
-      <div class="prose-app text-base">{view.description}</div>
+      <div class="prose-app text-base" set:html={descriptionHTML}></div>
     </div>
   )}
 
-  {view.releaseNotes && (
+  {releaseNotesHTML && (
     <details class="rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-5">
       <summary class="flex items-center justify-between gap-3 font-semibold text-[color:var(--color-text-soft)] hover:text-[color:var(--color-text)] transition">
         <span class="inline-flex items-center gap-2">
@@ -30,7 +39,7 @@ const { view, i18n } = Astro.props;
           <path d="m6 9 6 6 6-6"/>
         </svg>
       </summary>
-      <div class="mt-4 prose-app text-sm">{view.releaseNotes}</div>
+      <div class="mt-4 prose-app text-sm" set:html={releaseNotesHTML}></div>
     </details>
   )}
 </section>
