@@ -4,6 +4,7 @@ import type { FaviconPaths, LocaleInfo, LocaleLink, SiteInfo } from '../lib/type
 import { pickText } from '../lib/i18n.ts';
 import LanguagePicker from '../components/LanguagePicker.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
+import SearchBar from '../components/SearchBar.astro';
 import Footer from '../components/Footer.astro';
 
 interface Props {
@@ -189,6 +190,7 @@ const redirectPayload = JSON.stringify({
           class="font-semibold tracking-tight text-base sm:text-lg shrink-0"
         >{siteTitleText}</a>
         <div class="flex-1"></div>
+        {site.pagefind && <SearchBar locale={current} />}
         <LanguagePicker locales={localeLinks} current={current} />
         <ThemeToggle />
       </div>

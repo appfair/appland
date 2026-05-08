@@ -1,0 +1,113 @@
+---
+import type { LocaleInfo } from '../lib/types.ts';
+import { uiStrings } from '../lib/uistrings.ts';
+
+interface Props {
+  locale: LocaleInfo;
+}
+
+const { locale } = Astro.props;
+const ui = uiStrings(locale.code);
+---
+
+{/*
+  Pagefind UI mounts inside #search and is initialized once the script
+  loads. The stylesheet is also produced by `pagefind` at build time, so
+  in dev (where pagefind hasn't run yet) both URLs 404 silently and the
+  search bar is inert — the rest of the page renders fine.
+*/}
+<link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+
+<div
+  id="search"
+  data-pagefind-search
+  class="hidden md:block w-72 lg:w-80"
+></div>
+
+<script src="/pagefind/pagefind-ui.js" is:inline defer></script>
+<script
+  is:inline
+  define:vars={{
+    placeholder: ui.searchPlaceholder,
+    clearLabel: ui.searchClearLabel,
+    zeroResults: ui.searchZeroResults,
+    languageCode: locale.code,
+  }}
+>
+  // Pagefind UI is a UMD bundle that exposes `window.PagefindUI`. We can
+  // safely re-use the same #search element across navigations because we
+  // only mount once per page load.
+  function mountPagefind() {
+    if (typeof window.PagefindUI !== 'function') return;
+    new window.PagefindUI({
+      element: '#search',
+      showImages: false,
+      showSubResults: true,
+      resetStyles: false,
+      placeholder,
+      translations: {
+        placeholder,
+        clear_search: clearLabel,
+        zero_results: zeroResults,
+      },
+      // Restrict results to the current page locale so visitors browsing
+      // the German site don't get Spanish hits.
+      mergeIndex: [],
+      processResult: (result) => {
+        if (
+          languageCode &&
+          result.meta &&
+          result.meta.language &&
+          result.meta.language !== languageCode &&
+          !result.meta.language.startsWith(languageCode.split('-')[0])
+        ) {
+          return null;
+        }
+        return result;
+      },
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', mountPagefind);
+  } else {
+    mountPagefind();
+  }
+  // pagefind-ui.js is loaded with `defer`, so it may not be ready by the
+  // time the listener above fires — also try once it's actually present.
+  window.addEventListener('load', mountPagefind);
+</script>
+
+<style is:global>
+  /* Make Pagefind's default UI inherit the site's accent and surface
+     colours so the search box visually belongs to the header. */
+  #search {
+    --pagefind-ui-primary: var(--color-accent, var(--accent, #3b82f6));
+    --pagefind-ui-text: var(--color-text);
+    --pagefind-ui-background: var(--color-surface);
+    --pagefind-ui-border: var(--color-border);
+    --pagefind-ui-tag: var(--color-surface-2);
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: 9999px;
+    --pagefind-ui-font: inherit;
+  }
+  #search .pagefind-ui__search-input {
+    height: 2.25rem;
+    padding-inline: 0.875rem 2.25rem;
+    font-size: 0.875rem;
+  }
+  /* The drawer with results: anchor it to the input and lift it above the
+     sticky header so it isn't clipped by the header's bottom border. */
+  #search .pagefind-ui__drawer {
+    position: absolute;
+    inset-inline-end: 0;
+    top: calc(100% + 0.5rem);
+    width: min(28rem, 90vw);
+    max-height: 70vh;
+    overflow: auto;
+    border-radius: 1rem;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.18);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    z-index: 50;
+  }
+</style>

@@ -19,6 +19,7 @@
     "astro": "^5.16.4",
     "jimp": "^1.6.0",
     "js-yaml": "^4.1.0",
+    "pagefind": "^1.4.0",
     "tailwindcss": "^4.1.17",
     "typescript": "^5.9.3"
   },

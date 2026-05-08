@@ -22,6 +22,13 @@ export interface SiteInfo {
   analyticsScript?: string;
   analyticsDomain?: string;
   socialImage?: string;
+  /**
+   * When true, run Pagefind over the built site and surface a search bar
+   * in the page header. The Pagefind index is emitted into
+   * `dist/pagefind/`; the UI is added only when this flag is set, so
+   * sites that opt out have no extra payload.
+   */
+  pagefind?: boolean;
 }
 
 // Subset of the appindex.json fields actually used at render time.

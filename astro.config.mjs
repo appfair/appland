@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import { fileURLToPath } from 'node:url';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { loadSite } from './src/lib/data.ts';
@@ -7,6 +8,32 @@ import { loadSite } from './src/lib/data.ts';
 const data = await loadSite();
 
 const localeCodes = data.locales.map((l) => l.code);
+
+/**
+ * Run Pagefind over the built `dist/` directory once Astro is done. Only
+ * activated when siteinfo.yaml has `pagefind: true` — opted-out sites
+ * never spawn the indexer or ship the index files.
+ *
+ * @param {boolean} enabled
+ * @returns {import('astro').AstroIntegration}
+ */
+function pagefindIntegration(enabled) {
+  return {
+    name: 'pagefind',
+    hooks: {
+      'astro:build:done': async ({ dir, logger }) => {
+        if (!enabled) return;
+        const sitePath = fileURLToPath(dir);
+        logger.info(`indexing ${sitePath}`);
+        const { createIndex } = await import('pagefind');
+        const { index } = await createIndex({});
+        if (!index) throw new Error('pagefind: createIndex returned no handle');
+        await index.addDirectory({ path: sitePath });
+        await index.writeFiles({ outputPath: `${sitePath}/pagefind` });
+      },
+    },
+  };
+}
 
 export default defineConfig({
   site: data.site.host,
@@ -23,6 +50,7 @@ export default defineConfig({
         ),
       },
     }),
+    pagefindIntegration(data.site.pagefind === true),
   ],
   vite: {
     plugins: [/** @type {any} */ (tailwindcss())],

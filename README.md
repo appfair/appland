@@ -126,6 +126,7 @@ Edit `site/siteinfo.yaml`. Recognized fields:
 | `analyticsScript`     |          | Optional analytics script URL.                     |
 | `analyticsDomain`     |          | `data-domain` attribute for the analytics script.  |
 | `socialImage`         |          | OpenGraph card image. Falls back to feature-graphic, then app icon. |
+| `pagefind`            |          | When `true`, runs [Pagefind](https://pagefind.app/) over the built site and adds a search bar to the header. Default `false`. |
 
 † **Localizable.** Fields marked † accept either a plain string or a
 locale-keyed map, so e.g.

@@ -19,6 +19,12 @@ export interface UIStrings {
   privacyLink: string;
   supportLink: string;
   dependenciesLabel: string;
+  /** Pagefind search input placeholder. */
+  searchPlaceholder: string;
+  /** Pagefind "clear search" affordance. */
+  searchClearLabel: string;
+  /** Pagefind empty-results message; "[SEARCH_TERM]" is interpolated. */
+  searchZeroResults: string;
 }
 
 const EN: UIStrings = {
@@ -35,6 +41,9 @@ const EN: UIStrings = {
   privacyLink: 'Privacy',
   supportLink: 'Support',
   dependenciesLabel: 'Dependencies',
+  searchPlaceholder: 'Search',
+  searchClearLabel: 'Clear',
+  searchZeroResults: 'No results for [SEARCH_TERM]',
 };
 
 const TABLES: Record<string, Partial<UIStrings>> = {
@@ -52,6 +61,9 @@ const TABLES: Record<string, Partial<UIStrings>> = {
     privacyLink: 'الخصوصية',
     supportLink: 'الدعم',
     dependenciesLabel: 'الاعتماديات',
+    searchPlaceholder: 'بحث',
+    searchClearLabel: 'مسح',
+    searchZeroResults: 'لا توجد نتائج لـ [SEARCH_TERM]',
   },
   de: {
     about: 'Über die App',
@@ -67,6 +79,9 @@ const TABLES: Record<string, Partial<UIStrings>> = {
     privacyLink: 'Datenschutz',
     supportLink: 'Support',
     dependenciesLabel: 'Abhängigkeiten',
+    searchPlaceholder: 'Suchen',
+    searchClearLabel: 'Löschen',
+    searchZeroResults: 'Keine Ergebnisse für [SEARCH_TERM]',
   },
   es: {
     about: 'Acerca de',
@@ -82,6 +97,9 @@ const TABLES: Record<string, Partial<UIStrings>> = {
     privacyLink: 'Privacidad',
     supportLink: 'Soporte',
     dependenciesLabel: 'Dependencias',
+    searchPlaceholder: 'Buscar',
+    searchClearLabel: 'Borrar',
+    searchZeroResults: 'Sin resultados para [SEARCH_TERM]',
   },
   fr: {
     about: 'À propos',
@@ -97,6 +115,9 @@ const TABLES: Record<string, Partial<UIStrings>> = {
     privacyLink: 'Confidentialité',
     supportLink: 'Assistance',
     dependenciesLabel: 'Dépendances',
+    searchPlaceholder: 'Rechercher',
+    searchClearLabel: 'Effacer',
+    searchZeroResults: 'Aucun résultat pour [SEARCH_TERM]',
   },
   hi: {
     about: 'ऐप के बारे में',
@@ -112,6 +133,9 @@ const TABLES: Record<string, Partial<UIStrings>> = {
     privacyLink: 'गोपनीयता',
     supportLink: 'सहायता',
     dependenciesLabel: 'निर्भरताएँ',
+    searchPlaceholder: 'खोजें',
+    searchClearLabel: 'साफ़ करें',
+    searchZeroResults: '[SEARCH_TERM] के लिए कोई परिणाम नहीं',
   },
   id: {
     about: 'Tentang aplikasi',
@@ -127,6 +151,9 @@ const TABLES: Record<string, Partial<UIStrings>> = {
     privacyLink: 'Privasi',
     supportLink: 'Dukungan',
     dependenciesLabel: 'Dependensi',
+    searchPlaceholder: 'Cari',
+    searchClearLabel: 'Bersihkan',
+    searchZeroResults: 'Tidak ada hasil untuk [SEARCH_TERM]',
   },
   it: {
     about: 'Informazioni',
@@ -142,6 +169,9 @@ const TABLES: Record<string, Partial<UIStrings>> = {
     privacyLink: 'Privacy',
     supportLink: 'Supporto',
     dependenciesLabel: 'Dipendenze',
+    searchPlaceholder: 'Cerca',
+    searchClearLabel: 'Cancella',
+    searchZeroResults: 'Nessun risultato per [SEARCH_TERM]',
   },
   ja: {
     about: 'アプリについて',
@@ -157,6 +187,9 @@ const TABLES: Record<string, Partial<UIStrings>> = {
     privacyLink: 'プライバシー',
     supportLink: 'サポート',
     dependenciesLabel: '依存関係',
+    searchPlaceholder: '検索',
+    searchClearLabel: 'クリア',
+    searchZeroResults: '[SEARCH_TERM] の検索結果はありません',
   },
   ko: {
     about: '앱 정보',
@@ -172,6 +205,9 @@ const TABLES: Record<string, Partial<UIStrings>> = {
     privacyLink: '개인정보 처리방침',
     supportLink: '지원',
     dependenciesLabel: '종속성',
+    searchPlaceholder: '검색',
+    searchClearLabel: '지우기',
+    searchZeroResults: '[SEARCH_TERM]에 대한 결과가 없습니다',
   },
   pt: {
     about: 'Sobre',
@@ -187,6 +223,9 @@ const TABLES: Record<string, Partial<UIStrings>> = {
     privacyLink: 'Privacidade',
     supportLink: 'Suporte',
     dependenciesLabel: 'Dependências',
+    searchPlaceholder: 'Pesquisar',
+    searchClearLabel: 'Limpar',
+    searchZeroResults: 'Sem resultados para [SEARCH_TERM]',
   },
   ru: {
     about: 'О приложении',
@@ -202,6 +241,9 @@ const TABLES: Record<string, Partial<UIStrings>> = {
     privacyLink: 'Конфиденциальность',
     supportLink: 'Поддержка',
     dependenciesLabel: 'Зависимости',
+    searchPlaceholder: 'Поиск',
+    searchClearLabel: 'Очистить',
+    searchZeroResults: 'Нет результатов для [SEARCH_TERM]',
   },
   zh: {
     about: '关于',
@@ -217,6 +259,9 @@ const TABLES: Record<string, Partial<UIStrings>> = {
     privacyLink: '隐私',
     supportLink: '支持',
     dependenciesLabel: '依赖项',
+    searchPlaceholder: '搜索',
+    searchClearLabel: '清除',
+    searchZeroResults: '没有 [SEARCH_TERM] 的结果',
   },
 };
 
