@@ -1,0 +1,82 @@
+---
+import type { AppView, LocaleInfo, SiteInfo } from '../lib/types.ts';
+
+interface Props {
+  site: SiteInfo;
+  apps: AppView[];
+  locale: LocaleInfo;
+  /** Returns the relative href for a given app slug in this locale. */
+  hrefFor: (slug: string) => string;
+}
+
+const { site, apps, locale, hrefFor } = Astro.props;
+
+const cards = apps.map((a) => {
+  const hero = a.hero(locale.code);
+  return {
+    slug: a.slug,
+    href: hrefFor(a.slug),
+    title: hero.title,
+    subtitle: hero.subtitle,
+    iconURL: hero.iconURL,
+    featureGraphicURL: hero.featureGraphicURL,
+  };
+});
+---
+
+<section class="space-y-8 sm:space-y-12">
+  <header class="space-y-3 text-center">
+    <h1 class="text-4xl sm:text-5xl font-bold tracking-tight">{site.title}</h1>
+    {site.tagline && (
+      <p class="text-lg sm:text-xl text-[color:var(--color-text-soft)]">{site.tagline}</p>
+    )}
+  </header>
+
+  <ul
+    class="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+    role="list"
+  >
+    {cards.map((c) => (
+      <li class="rise">
+        <a
+          href={c.href}
+          class="group block h-full rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-5 sm:p-6 hover:border-[color:var(--color-accent)] hover:bg-[color:var(--color-surface-2)] transition shadow-sm hover:shadow-md"
+        >
+          <div class="flex items-center gap-4">
+            {c.iconURL && (
+              <img
+                src={c.iconURL}
+                alt=""
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+                class="size-16 sm:size-20 rounded-2xl shadow ring-1 ring-black/5 bg-white shrink-0"
+              />
+            )}
+            <div class="min-w-0 flex-1">
+              <h2 class="text-lg sm:text-xl font-semibold tracking-tight truncate">
+                {c.title}
+              </h2>
+              {c.subtitle && (
+                <p class="text-sm sm:text-base text-[color:var(--color-text-soft)] line-clamp-2">
+                  {c.subtitle}
+                </p>
+              )}
+            </div>
+            <svg
+              viewBox="0 0 24 24"
+              class="size-5 opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 transition shrink-0"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <path d="M9 6l6 6-6 6" />
+            </svg>
+          </div>
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>

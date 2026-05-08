@@ -1,13 +1,13 @@
 ---
-import type { AppView, LocaleInfo, SiteInfo } from '../lib/types.ts';
+import type { SiteInfo } from '../lib/types.ts';
 
 interface Props {
   site: SiteInfo;
-  appView: AppView;
-  locale: LocaleInfo;
+  sourceURL?: string;
+  releaseURL?: string;
 }
 
-const { site, appView } = Astro.props;
+const { site, sourceURL, releaseURL } = Astro.props;
 const year = new Date().getFullYear();
 const footer = (site.footer ?? '').replace(/\{year\}/g, String(year));
 ---
@@ -16,9 +16,9 @@ const footer = (site.footer ?? '').replace(/\{year\}/g, String(year));
   <div class="mx-auto max-w-6xl px-4 sm:px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-[color:var(--color-text-muted)]">
     <p>{footer}</p>
     <div class="flex items-center gap-4">
-      {site.showSourceLink !== false && appView.sourceURL && (
+      {site.showSourceLink !== false && sourceURL && (
         <a
-          href={appView.sourceURL}
+          href={sourceURL}
           target="_blank"
           rel="noopener"
           class="inline-flex items-center gap-1.5 hover:text-[color:var(--color-text)] transition"
@@ -29,9 +29,9 @@ const footer = (site.footer ?? '').replace(/\{year\}/g, String(year));
           Source
         </a>
       )}
-      {appView.releaseURL && (
+      {releaseURL && (
         <a
-          href={appView.releaseURL}
+          href={releaseURL}
           target="_blank"
           rel="noopener"
           class="hover:text-[color:var(--color-text)] transition"

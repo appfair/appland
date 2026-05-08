@@ -1,0 +1,57 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Layout from '../../../../layouts/Layout.astro';
+import LandingPage from '../../../../components/LandingPage.astro';
+import { loadSite } from '../../../../lib/data.ts';
+import { appPageHref, localeLinksFor } from '../../../../lib/routes.ts';
+
+/**
+ * /{locale}/apps/{app}/ — per-app landing page in multi-app mode.
+ *
+ * In single-app mode this route generates no paths (the locale-index route
+ * already shows the landing page directly), so the resulting site is identical
+ * to what the single-app template produced before.
+ */
+export const getStaticPaths: GetStaticPaths = async () => {
+  const data = await loadSite();
+  if (!data.multiApp) return [];
+  const out: { params: { locale: string; app: string } }[] = [];
+  for (const l of data.locales) {
+    for (const a of data.apps) {
+      out.push({ params: { locale: l.code, app: a.slug } });
+    }
+  }
+  return out;
+};
+
+const { locale: localeParam, app: appParam } = Astro.params;
+const data = await loadSite();
+const locale = data.locales.find((l) => l.code === localeParam);
+const appView = data.apps.find((a) => a.slug === appParam);
+if (!locale) throw new Error(`Unknown locale: ${localeParam}`);
+if (!appView) throw new Error(`Unknown app: ${appParam}`);
+
+const hero = appView.hero(locale.code);
+const pageTitle = hero.subtitle ? `${hero.title} – ${hero.subtitle}` : hero.title;
+const pageDescription = hero.subtitle || (hero.description.split('\n')[0] ?? data.site.title);
+
+// Per-app pages: the language picker should hop to the same app in the new
+// locale, not back to the site index.
+const localeLinks = localeLinksFor(data.locales, (code) => appPageHref(code, appView.slug));
+const pagePath = appPageHref(locale.code, appView.slug);
+---
+
+<Layout
+  site={data.site}
+  localeLinks={localeLinks}
+  current={locale}
+  pagePath={pagePath}
+  pageTitle={pageTitle}
+  pageDescription={pageDescription}
+  socialImage={appView.socialImage ?? data.socialImage}
+  favicons={appView.favicons ?? data.favicons}
+  sourceURL={appView.sourceURL}
+  releaseURL={appView.releaseURL}
+>
+  <LandingPage site={data.site} appView={appView} locale={locale} />
+</Layout>

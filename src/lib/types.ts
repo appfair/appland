@@ -130,7 +130,15 @@ export interface LocaleInfo {
   englishName: string;
   /** Text direction; true if right-to-left. */
   rtl: boolean;
-  /** URL path for this locale's page (default locale → "/", others → "/{code}/"). */
+  /** Locale's index path: always "/{code}/". */
+  href: string;
+}
+
+/**
+ * Like LocaleInfo, but with a page-specific href used by the language
+ * picker on a sub-page (e.g. /{code}/apps/{slug}/).
+ */
+export interface LocaleLink extends LocaleInfo {
   href: string;
 }
 
@@ -177,6 +185,8 @@ export interface PermissionView {
 
 export interface AppView {
   app: AppEntry;
+  /** URL-safe identifier (the appindex `name` field, e.g. "Net-Skip"). */
+  slug: string;
   defaultLocale: string;
   locales: LocaleInfo[];
   platforms: ('ios' | 'android')[];
@@ -190,6 +200,24 @@ export interface AppView {
   /** A reasonable social-card image URL (feature graphic, or icon). */
   socialImage?: string;
   /** Site-root-relative URLs for the auto-generated favicon set. */
+  favicons?: FaviconPaths;
+}
+
+/**
+ * Top-level site data. In single-app mode `apps.length === 1` and the
+ * landing pages render that one app directly. In multi-app mode the locale
+ * roots render a list of apps and each app gets its own sub-route.
+ */
+export interface SiteData {
+  site: SiteInfo;
+  /** Union of locales across every app (or the single app's locales). */
+  locales: LocaleInfo[];
+  defaultLocale: string;
+  apps: AppView[];
+  multiApp: boolean;
+  /** Site-wide social-card image (used on the multi-app index). */
+  socialImage?: string;
+  /** Site-wide favicon set (used on the multi-app index). */
   favicons?: FaviconPaths;
 }
 

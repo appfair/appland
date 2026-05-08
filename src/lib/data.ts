@@ -8,10 +8,13 @@ import type {
   AppIndex,
   AppView,
   AssetView,
+  FaviconPaths,
   HeroView,
+  LocaleInfo,
   PermissionView,
   PlatformEntry,
   PlatformView,
+  SiteData,
   SiteInfo,
 } from './types.ts';
 import { localeInfo, pickAsset, pickAssetList, pickText, sortLocales } from './i18n.ts';
@@ -112,7 +115,6 @@ function collectLocales(app: AppEntry): string[] {
       }
     }
   }
-  if (seen.size === 0) seen.add(FALLBACK_DEFAULT_LOCALE);
   return Array.from(seen);
 }
 
@@ -158,13 +160,6 @@ function buildPlatformView(
   }));
 
   // Permissions: filter Android plumbing, attach localized descriptions.
-  //
-  // Each PermissionView gets:
-  //   - a localized display name resolved via lookupPermissionLabel (falling
-  //     back to the canonical English label when no translation exists),
-  //   - a localized description, taken from the appindex.json when supplied;
-  //     otherwise (Android only) the canonical platform description from
-  //     permission-descriptions.ts.
   const permissions: PermissionView[] = [];
   if (platform.permissions) {
     for (const p of platform.permissions) {
@@ -180,15 +175,9 @@ function buildPlatformView(
   }
   const sortedPerms = sortPermissions(permissions);
 
-  // App-level links (privacy / support / future) are localized URL maps and
-  // are now under app.links rather than per-platform fields.
   const privacyURL = pickText(app.links?.['privacy'], locale).value;
   const supportURL = pickText(app.links?.['support'], locale).value;
 
-  // Store URLs come from platform.distributions[<store>].url. We map the
-  // conventional store keys to their badge style; unknown keys are ignored
-  // for badge rendering but their URL is still preserved on storeURL when
-  // there's no canonical mapping.
   const dists = platform.channels ?? {};
   let storeURL: string | undefined;
   let storeBadge: PlatformView['storeBadge'];
@@ -201,7 +190,6 @@ function buildPlatformView(
     storeURL = google.url;
     storeBadge = 'google-play-store';
   } else {
-    // Fallback: any distribution that has a URL.
     const anyDist = Object.values(dists).find((d) => !!d?.url);
     if (anyDist?.url) storeURL = anyDist.url;
   }
@@ -238,26 +226,20 @@ function countSbomDependencies(platform: PlatformEntry): number {
   }).length;
 }
 
-// Public entry point ─────────────────────────────────────────────────────────
+// Per-app view ────────────────────────────────────────────────────────────────
 
-export interface LoadedSite {
-  site: SiteInfo;
-  appView: AppView;
+interface BuildAppViewOpts {
+  /** Locale list shared across the whole site (union over apps in multi-app mode). */
+  locales: LocaleInfo[];
+  defaultLocale: string;
+  /** True when generating favicons for this app (skipped for non-primary apps in multi-app mode). */
+  generateAppFavicons: boolean;
 }
 
-let cached: LoadedSite | undefined;
-
-export async function loadSite(): Promise<LoadedSite> {
-  if (cached) return cached;
-  const site = await loadSiteInfo();
-  const index = await loadAppIndex(site);
-  const app = index.apps[0]!;
-
-  const localesRaw = collectLocales(app);
-  const defaultLocale = pickDefaultLocale(localesRaw);
-  const orderedCodes = sortLocales(localesRaw, defaultLocale);
-  const locales = orderedCodes.map((c) => localeInfo(c, defaultLocale));
-
+async function buildAppView(
+  app: AppEntry,
+  opts: BuildAppViewOpts,
+): Promise<AppView> {
   const platformIds: ('ios' | 'android')[] = [];
   if (app.platforms.ios) platformIds.push('ios');
   if (app.platforms.android) platformIds.push('android');
@@ -265,11 +247,10 @@ export async function loadSite(): Promise<LoadedSite> {
   const view = (locale: string, platform: 'ios' | 'android'): PlatformView | null => {
     const p = app.platforms[platform];
     if (!p) return null;
-    return buildPlatformView(app, p, platform, locale, defaultLocale);
+    return buildPlatformView(app, p, platform, locale, opts.defaultLocale);
   };
 
   const hero = (locale: string): HeroView => {
-    // Use app-level fields with platform fallback for hero copy.
     const primary = app.platforms.ios ?? app.platforms.android!;
     const title = pickText(app.title ?? primary.title, locale).value ?? app.name;
     const subtitle = pickText(app.subtitle ?? primary.subtitle, locale).value ?? '';
@@ -280,11 +261,10 @@ export async function loadSite(): Promise<LoadedSite> {
     return { title, subtitle, description, iconURL, featureGraphicURL };
   };
 
-  // Social card image: explicit override, else Android feature graphic, else
-  // primary icon.
-  let socialImage: string | undefined = site.socialImage;
-  if (!socialImage && app.platforms.android?.assets?.featureGraphic) {
-    const fg = pickAsset(app.platforms.android.assets.featureGraphic, defaultLocale);
+  // Social card image: explicit override (site-level) is handled outside.
+  let socialImage: string | undefined;
+  if (app.platforms.android?.assets?.featureGraphic) {
+    const fg = pickAsset(app.platforms.android.assets.featureGraphic, opts.defaultLocale);
     socialImage = resolveAssetURL(fg.value?.location, app);
   }
   if (!socialImage) {
@@ -294,30 +274,30 @@ export async function loadSite(): Promise<LoadedSite> {
     );
   }
 
-  // Pick the highest-resolution app icon to derive favicons from.
-  const iconSource =
-    resolveAssetURL(app.platforms.ios?.assets?.icon?.location, app) ??
-    resolveAssetURL(app.platforms.android?.assets?.icon?.location, app);
-
   let favicons: AppView['favicons'];
-  if (iconSource) {
-    try {
-      favicons = await generateFavicons({
-        iconSource,
-        projectRoot: projectRoot(),
-      });
-    } catch (err) {
-      console.warn(
-        `[appland] favicon generation failed (${(err as Error).message}); ` +
-          'pages will render without a generated favicon.',
-      );
+  if (opts.generateAppFavicons) {
+    const iconSource =
+      resolveAssetURL(app.platforms.ios?.assets?.icon?.location, app) ??
+      resolveAssetURL(app.platforms.android?.assets?.icon?.location, app);
+    if (iconSource) {
+      try {
+        favicons = await generateFavicons({
+          iconSource,
+          projectRoot: projectRoot(),
+        });
+      } catch (err) {
+        console.warn(
+          `[appland] favicon generation failed for ${app.name} (${(err as Error).message})`,
+        );
+      }
     }
   }
 
-  const appView: AppView = {
+  return {
     app,
-    defaultLocale,
-    locales,
+    slug: app.name,
+    defaultLocale: opts.defaultLocale,
+    locales: opts.locales,
     platforms: platformIds,
     view,
     hero,
@@ -326,8 +306,98 @@ export async function loadSite(): Promise<LoadedSite> {
     socialImage,
     favicons,
   };
+}
 
-  cached = { site, appView };
+// Public entry point ─────────────────────────────────────────────────────────
+
+export interface LoadedSite extends SiteData {
+  /**
+   * Convenience accessor that returns the first (and, in single-app mode,
+   * only) AppView. Existing single-app callers use this in place of the old
+   * top-level `appView` field.
+   */
+  appView: AppView;
+}
+
+let cached: LoadedSite | undefined;
+
+export async function loadSite(): Promise<LoadedSite> {
+  if (cached) return cached;
+  const site = await loadSiteInfo();
+  const index = await loadAppIndex(site);
+
+  // Locale union across every app in the index
+  const localeUnion = new Set<string>();
+  for (const app of index.apps) {
+    for (const c of collectLocales(app)) localeUnion.add(c);
+  }
+  if (localeUnion.size === 0) localeUnion.add(FALLBACK_DEFAULT_LOCALE);
+
+  const localesRaw = Array.from(localeUnion);
+  const defaultLocale = pickDefaultLocale(localesRaw);
+  const orderedCodes = sortLocales(localesRaw, defaultLocale);
+  const locales: LocaleInfo[] = orderedCodes.map((c) => localeInfo(c, defaultLocale));
+
+  const multiApp = index.apps.length > 1;
+
+  const apps: AppView[] = [];
+  for (let i = 0; i < index.apps.length; i++) {
+    const app = index.apps[i]!;
+    apps.push(
+      await buildAppView(app, {
+        locales,
+        defaultLocale,
+        // Single-app: generate favicons from the app's icon (existing behaviour).
+        // Multi-app: site-level favicons are produced separately below.
+        generateAppFavicons: !multiApp,
+      }),
+    );
+  }
+
+  // Site-level social image / favicons
+  let siteSocialImage = site.socialImage;
+  if (!siteSocialImage) {
+    siteSocialImage = apps[0]?.socialImage;
+  }
+
+  let siteFavicons: FaviconPaths | undefined;
+  if (multiApp) {
+    // Use the first app's icon as the site favicon source for now. The
+    // aggregate site can override by placing files under public/.
+    const firstApp = apps[0];
+    const iconSource = firstApp
+      ? resolveAssetURL(
+          firstApp.app.platforms.ios?.assets?.icon?.location ??
+            firstApp.app.platforms.android?.assets?.icon?.location,
+          firstApp.app,
+        )
+      : undefined;
+    if (iconSource) {
+      try {
+        siteFavicons = await generateFavicons({
+          iconSource,
+          projectRoot: projectRoot(),
+        });
+      } catch (err) {
+        console.warn(
+          `[appland] site favicon generation failed (${(err as Error).message})`,
+        );
+      }
+    }
+  } else {
+    siteFavicons = apps[0]?.favicons;
+  }
+
+  cached = {
+    site,
+    locales,
+    defaultLocale,
+    apps,
+    multiApp,
+    socialImage: siteSocialImage,
+    favicons: siteFavicons,
+    appView: apps[0]!,
+  };
   return cached;
 }
 
