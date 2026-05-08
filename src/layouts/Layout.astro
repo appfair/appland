@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import type { FaviconPaths, LocaleInfo, LocaleLink, SiteInfo } from '../lib/types.ts';
+import { pickText } from '../lib/i18n.ts';
 import LanguagePicker from '../components/LanguagePicker.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
 import Footer from '../components/Footer.astro';
@@ -49,6 +50,11 @@ const {
 const path = pagePath ?? current.href;
 const canonical = new URL(path, site.host).toString();
 const accent = site.accentColor ?? '#3B82F6';
+
+// Site title appears in the sticky top-bar and as a hreflang anchor; it's
+// localized via pickText so siteinfo.yaml can carry either a plain string
+// or a locale-keyed map.
+const siteTitleText = pickText(site.title, current.code).value ?? '';
 
 // hreflang alternates per locale, page-specific href
 const alternates = localeLinks.map((l) => ({
@@ -181,7 +187,7 @@ const redirectPayload = JSON.stringify({
         <a
           href={current.href}
           class="font-semibold tracking-tight text-base sm:text-lg shrink-0"
-        >{site.title}</a>
+        >{siteTitleText}</a>
         <div class="flex-1"></div>
         <LanguagePicker locales={localeLinks} current={current} />
         <ThemeToggle />
@@ -194,6 +200,7 @@ const redirectPayload = JSON.stringify({
 
     <Footer
       site={site}
+      locale={current}
       sourceURL={sourceURL}
       releaseURL={releaseURL}
     />

@@ -4,6 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import LandingPage from '../../components/LandingPage.astro';
 import AppGrid from '../../components/AppGrid.astro';
 import { loadSite } from '../../lib/data.ts';
+import { pickText } from '../../lib/i18n.ts';
 import { appPageHref, localeIndexHref, localeLinksFor } from '../../lib/routes.ts';
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -26,14 +27,17 @@ let sourceURL: string | undefined;
 let releaseURL: string | undefined;
 let socialImage: string | undefined = data.socialImage;
 
+const localizedSiteTitle = pickText(data.site.title, locale.code).value ?? '';
+const localizedSiteTagline = pickText(data.site.tagline, locale.code).value;
+
 if (data.multiApp) {
-  pageTitle = data.site.title;
-  pageDescription = data.site.tagline ?? data.site.title;
+  pageTitle = localizedSiteTitle;
+  pageDescription = localizedSiteTagline ?? localizedSiteTitle;
 } else {
   const appView = data.apps[0]!;
   const hero = appView.hero(locale.code);
   pageTitle = hero.subtitle ? `${hero.title} – ${hero.subtitle}` : hero.title;
-  pageDescription = hero.subtitle || (hero.description.split('\n')[0] ?? data.site.title);
+  pageDescription = hero.subtitle || (hero.description.split('\n')[0] ?? localizedSiteTitle);
   sourceURL = appView.sourceURL;
   releaseURL = appView.releaseURL;
   socialImage = appView.socialImage ?? socialImage;

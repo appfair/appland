@@ -111,10 +111,10 @@ Edit `site/siteinfo.yaml`. Recognized fields:
 
 | Field                 | Required | Description                                         |
 | --------------------- | -------- | --------------------------------------------------- |
-| `title`               | yes      | Site name (used in `<title>`, OpenGraph, header).   |
+| `title` †             | yes      | Site name (used in `<title>`, OpenGraph, header, multi-app catalog hero). |
 | `host`                | yes      | Canonical site URL (sitemap, OpenGraph, canonical). |
 | `appindex`            | yes      | Path to the publication document, relative to siteinfo.yaml. |
-| `tagline`             |          | `<meta description>` fallback when no per-locale subtitle. |
+| `tagline` †           |          | Subtitle below the title in the multi-app catalog hero, and `<meta description>` fallback. |
 | `accentColor`         |          | Brand accent (any CSS colour). Defaults to `#3B82F6`. |
 | `defaultTheme`        |          | `light` \| `dark` \| `system`. Defaults to `system`. |
 | `defaultPlatform`     |          | `ios` \| `android`. Defaults to `ios`. Hidden when only one platform is published. |
@@ -122,10 +122,24 @@ Edit `site/siteinfo.yaml`. Recognized fields:
 | `showStoreBadges`     |          | Show App Store / Play Store badges. Default `true`. |
 | `showPermissions`     |          | Show the permissions section. Default `true`.      |
 | `showDependencyCount` |          | Show the SBOM dependency count. Default `true`.    |
-| `footer`              |          | Footer copyright line; `{year}` is interpolated.   |
+| `footer` †            |          | Footer line; `{year}` is interpolated; the description sanitizer's HTML subset (notably `<a>`) is supported. |
 | `analyticsScript`     |          | Optional analytics script URL.                     |
 | `analyticsDomain`     |          | `data-domain` attribute for the analytics script.  |
 | `socialImage`         |          | OpenGraph card image. Falls back to feature-graphic, then app icon. |
+
+† **Localizable.** Fields marked † accept either a plain string or a
+locale-keyed map, so e.g.
+
+```yaml
+title:
+  en:      'The App Fair Project'
+  de:      'Das App-Fair-Projekt'
+  zh-Hans: 'App Fair 项目'
+```
+
+renders the right text in each locale's page. Lookup uses the same
+`exact → language-only → en-US → en → first` fallback as the appindex's
+own localized fields, so partial coverage is fine.
 
 ## Helper scripts
 

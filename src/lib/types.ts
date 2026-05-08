@@ -1,9 +1,11 @@
 // Shape of site/siteinfo.yaml.
 export interface SiteInfo {
-  title: string;
+  /** Site name. Plain string, or a locale-keyed map for localization. */
+  title: string | LocalizedText;
   host: string;
   appindex: string;
-  tagline?: string;
+  /** Tagline / subtitle. Plain string, or a locale-keyed map. */
+  tagline?: string | LocalizedText;
   accentColor?: string;
   defaultTheme?: 'light' | 'dark' | 'system';
   defaultPlatform?: 'ios' | 'android';
@@ -11,7 +13,12 @@ export interface SiteInfo {
   showStoreBadges?: boolean;
   showPermissions?: boolean;
   showDependencyCount?: boolean;
-  footer?: string;
+  /**
+   * Footer copyright line. Plain string or a locale-keyed map. May contain
+   * the small subset of HTML the description sanitizer permits (notably
+   * `<a href="…">…</a>`). `{year}` is interpolated to the current year.
+   */
+  footer?: string | LocalizedText;
   analyticsScript?: string;
   analyticsDomain?: string;
   socialImage?: string;

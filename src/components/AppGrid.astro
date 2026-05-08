@@ -1,5 +1,6 @@
 ---
 import type { AppView, LocaleInfo, SiteInfo } from '../lib/types.ts';
+import { pickText } from '../lib/i18n.ts';
 
 interface Props {
   site: SiteInfo;
@@ -10,6 +11,11 @@ interface Props {
 }
 
 const { site, apps, locale, hrefFor } = Astro.props;
+
+// Site title and tagline accept a locale-keyed map in addition to a
+// plain string, so the catalog hero is fully localized.
+const heroTitle = pickText(site.title, locale.code).value ?? '';
+const heroTagline = pickText(site.tagline, locale.code).value;
 
 const cards = apps.map((a) => {
   const hero = a.hero(locale.code);
@@ -26,9 +32,9 @@ const cards = apps.map((a) => {
 
 <section class="space-y-8 sm:space-y-12">
   <header class="space-y-3 text-center">
-    <h1 class="text-4xl sm:text-5xl font-bold tracking-tight">{site.title}</h1>
-    {site.tagline && (
-      <p class="text-lg sm:text-xl text-[color:var(--color-text-soft)]">{site.tagline}</p>
+    <h1 class="text-4xl sm:text-5xl font-bold tracking-tight">{heroTitle}</h1>
+    {heroTagline && (
+      <p class="text-lg sm:text-xl text-[color:var(--color-text-soft)]">{heroTagline}</p>
     )}
   </header>
 

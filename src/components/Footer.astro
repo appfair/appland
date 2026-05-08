@@ -1,20 +1,30 @@
 ---
-import type { SiteInfo } from '../lib/types.ts';
+import type { LocaleInfo, SiteInfo } from '../lib/types.ts';
+import { pickText } from '../lib/i18n.ts';
+import { sanitizeDescription } from '../lib/html.ts';
 
 interface Props {
   site: SiteInfo;
+  /** The locale this page is rendered in. Used to pick the localized footer. */
+  locale: LocaleInfo;
   sourceURL?: string;
   releaseURL?: string;
 }
 
-const { site, sourceURL, releaseURL } = Astro.props;
+const { site, locale, sourceURL, releaseURL } = Astro.props;
 const year = new Date().getFullYear();
-const footer = (site.footer ?? '').replace(/\{year\}/g, String(year));
+// Footer text may be a plain string or a locale-keyed map; in either case
+// it can carry the small subset of HTML the description sanitizer permits
+// (notably <a href="…">…</a>) so authors can include a project link.
+const localizedFooter = pickText(site.footer, locale.code).value ?? '';
+const footerHTML = sanitizeDescription(
+  localizedFooter.replace(/\{year\}/g, String(year)),
+);
 ---
 
 <footer class="mt-16 border-t border-[color:var(--color-border-soft)]">
   <div class="mx-auto max-w-6xl px-4 sm:px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-[color:var(--color-text-muted)]">
-    <p>{footer}</p>
+    <p set:html={footerHTML}></p>
     <div class="flex items-center gap-4">
       {site.showSourceLink !== false && sourceURL && (
         <a

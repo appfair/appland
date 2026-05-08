@@ -45,6 +45,15 @@ export async function loadSiteInfo(): Promise<SiteInfo> {
   if (!parsed.title) throw new Error('siteinfo.yaml: "title" is required');
   if (!parsed.host) throw new Error('siteinfo.yaml: "host" is required');
   if (!parsed.appindex) throw new Error('siteinfo.yaml: "appindex" is required');
+  // The default footer interpolates the title — pull a usable string
+  // out even when title is a locale-keyed map.
+  const titleString =
+    typeof parsed.title === 'string'
+      ? parsed.title
+      : ((parsed.title as Record<string, string>)['en-US'] ??
+        (parsed.title as Record<string, string>)['en'] ??
+        Object.values(parsed.title as Record<string, string>)[0] ??
+        '');
   return {
     showSourceLink: true,
     showStoreBadges: true,
@@ -53,7 +62,7 @@ export async function loadSiteInfo(): Promise<SiteInfo> {
     defaultTheme: 'system',
     defaultPlatform: 'ios',
     accentColor: '#3B82F6',
-    footer: `© {year} ${parsed.title}`,
+    footer: `© {year} ${titleString}`,
     ...parsed,
   } as SiteInfo;
 }

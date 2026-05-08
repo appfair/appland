@@ -3,6 +3,7 @@ import type { GetStaticPaths } from 'astro';
 import Layout from '../../../../layouts/Layout.astro';
 import LandingPage from '../../../../components/LandingPage.astro';
 import { loadSite } from '../../../../lib/data.ts';
+import { pickText } from '../../../../lib/i18n.ts';
 import { appPageHref, localeLinksFor } from '../../../../lib/routes.ts';
 
 /**
@@ -33,7 +34,8 @@ if (!appView) throw new Error(`Unknown app: ${appParam}`);
 
 const hero = appView.hero(locale.code);
 const pageTitle = hero.subtitle ? `${hero.title} – ${hero.subtitle}` : hero.title;
-const pageDescription = hero.subtitle || (hero.description.split('\n')[0] ?? data.site.title);
+const fallbackSiteTitle = pickText(data.site.title, locale.code).value ?? '';
+const pageDescription = hero.subtitle || (hero.description.split('\n')[0] ?? fallbackSiteTitle);
 
 // Per-app pages: the language picker should hop to the same app in the new
 // locale, not back to the site index.
