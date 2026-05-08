@@ -1,14 +1,15 @@
 ---
-import type { HeroView, PlatformView, SiteInfo } from '../lib/types.ts';
+import type { HeroView, LocaleInfo, PlatformView, SiteInfo } from '../lib/types.ts';
 import StoreBadges from './StoreBadges.astro';
 
 interface Props {
   hero: HeroView;
   views: Partial<Record<'ios' | 'android', PlatformView | null>>;
   site: SiteInfo;
+  locale: LocaleInfo;
 }
 
-const { hero, views, site } = Astro.props;
+const { hero, views, site, locale } = Astro.props;
 ---
 
 <section class="relative">
@@ -38,7 +39,7 @@ const { hero, views, site } = Astro.props;
         <p class="text-lg sm:text-xl text-[color:var(--color-text-soft)]">{hero.subtitle}</p>
       )}
       {site.showStoreBadges !== false && (
-        <StoreBadges views={views} />
+        <StoreBadges views={views} locale={locale} />
       )}
     </div>
   </div>

@@ -1,17 +1,22 @@
 ---
-import type { PlatformView } from '../lib/types.ts';
+import type { LocaleInfo, PlatformView } from '../lib/types.ts';
+import { badgeLocale } from '../lib/i18n.ts';
 
 interface Props {
   views: Partial<Record<'ios' | 'android', PlatformView | null>>;
+  locale: LocaleInfo;
 }
 
-const { views } = Astro.props;
-
+const { views, locale } = Astro.props;
 const ios = views.ios;
 const android = views.android;
 
-const APPLE_BADGE = 'https://appfair.org/assets/badges/apple-app-store.svg';
-const GOOGLE_BADGE = 'https://appfair.org/assets/badges/google-play-store.svg';
+// Per-locale badge files live under public/badges/<code>/. badgeLocale()
+// resolves to a code we actually shipped for that store (with `en` as the
+// final fallback), so these URLs never 404. Apple and Google have
+// different destination locale sets, so each is resolved independently.
+const APPLE_BADGE = `/badges/${badgeLocale(locale.code, 'apple')}/apple-app-store.svg`;
+const GOOGLE_BADGE = `/badges/${badgeLocale(locale.code, 'google')}/google-play-store.svg`;
 ---
 
 <div class="flex flex-wrap gap-3 items-center">
