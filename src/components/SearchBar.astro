@@ -120,27 +120,45 @@ const ui = uiStrings(locale.code);
     display: none;
   }
 
-  /* Match the language picker's footprint: 2rem tall, text-sm, pill chrome. */
+  /*
+   * Match the language picker pill exactly: 2rem tall (text-sm with
+   * py-1.5 inside a 1px border), 0.875rem font, weight 500, px-3-style
+   * horizontal padding. The default Pagefind input is ~3rem tall with a
+   * 1rem 700-weight font, so every value below is an explicit override.
+   */
   .search-shell .pagefind-ui__form {
     margin: 0;
+    position: relative;
   }
   .search-shell .pagefind-ui__search-input {
+    box-sizing: border-box;
     height: 2rem;
+    /* Room for the magnifier on the left and the Clear button on the right. */
     padding-block: 0;
+    padding-inline-start: 1.875rem;
+    padding-inline-end: 2.5rem;
     font-size: 0.875rem;
     font-weight: 500;
     line-height: 1.25;
   }
-  /* Pagefind's default magnifier-button is sized for a tall input; shrink
-     it so it sits cleanly inside the smaller pill. */
+  /* Vertically centre the magnifier glyph inside the smaller pill. */
   .search-shell .pagefind-ui__form::before {
     width: 0.875rem;
     height: 0.875rem;
     background-size: 0.875rem;
-    top: 0.55rem;
+    top: 50%;
+    inset-inline-start: 0.625rem;
+    transform: translateY(-50%);
   }
+  /* Clear button: same height as the input, smaller text, hugs the right edge. */
   .search-shell .pagefind-ui__search-clear {
-    padding-block: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    inset-inline-end: 0.5rem;
+    height: 1.5rem;
+    padding: 0 0.5rem;
     font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1;
   }
 </style>
