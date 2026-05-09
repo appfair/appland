@@ -11,154 +11,164 @@ const ui = uiStrings(locale.code);
 ---
 
 {/*
-  Pagefind ships its own search UI as a self-contained module. We just
-  give it a mount point, mount once, and let it draw the input and the
-  result list itself. The wrapper is `position: relative` so the result
-  list can be positioned as a floating dropdown that doesn't expand the
-  sticky header when the user types.
+  Search uses Pagefind's headless API (loaded lazily on first focus) to
+  keep the chrome simple: the visible input is a plain pill that mirrors
+  the LanguagePicker, and results render into our own dropdown — none of
+  Pagefind's default UI styles are loaded.
 
-  In dev mode pagefind hasn't run yet, so /pagefind/* 404s and the
-  search box is silently inert — the rest of the page is unaffected.
+  In dev mode /pagefind/pagefind.js doesn't exist; the dynamic import
+  fails silently and the input stays inert.
 */}
-<link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+<div class="relative hidden md:block" data-search>
+  <label
+    class="inline-flex items-center gap-1.5 rounded-full border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-1.5 text-sm font-medium focus-within:border-[color:var(--color-accent)] focus-within:ring-2 focus-within:ring-[color:var(--color-accent)] transition w-44 lg:w-56"
+  >
+    <svg
+      viewBox="0 0 24 24"
+      class="size-4 shrink-0 opacity-60"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      aria-hidden="true"
+    >
+      <circle cx="11" cy="11" r="7" />
+      <path d="m21 21-4.3-4.3" />
+    </svg>
+    <input
+      type="search"
+      placeholder={ui.searchPlaceholder}
+      aria-label={ui.searchPlaceholder}
+      autocomplete="off"
+      data-search-input
+      class="min-w-0 flex-1 border-0 bg-transparent p-0 outline-none placeholder:text-[color:var(--color-text-muted)]"
+    />
+  </label>
 
-<div class="search-shell relative hidden md:block">
-  <div id="search" class="w-40 lg:w-52"></div>
+  <div
+    hidden
+    data-search-results
+    class="absolute end-0 top-[calc(100%+0.5rem)] z-50 w-[min(28rem,calc(100vw-2rem))] max-h-[min(70vh,32rem)] overflow-auto rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-surface)] shadow-2xl p-2"
+  >
+    <p data-search-message class="px-3 py-2 text-sm text-[color:var(--color-text-muted)]"></p>
+    <ul data-search-list class="space-y-0.5"></ul>
+  </div>
+
+  {/* Tailwind needs to see these classes in source so they end up in the
+      bundle even though the result items are constructed in JS. */}
+  <template data-search-template>
+    <li>
+      <a
+        class="block rounded-xl px-3 py-2 hover:bg-[color:var(--color-surface-2)] transition"
+        data-link
+      >
+        <div class="text-sm font-semibold tracking-tight" data-title></div>
+        <div class="mt-0.5 line-clamp-2 text-xs text-[color:var(--color-text-muted)]" data-excerpt></div>
+      </a>
+    </li>
+  </template>
 </div>
 
-<script src="/pagefind/pagefind-ui.js" is:inline defer></script>
 <script
   is:inline
   define:vars={{
-    placeholder: ui.searchPlaceholder,
-    clearLabel: ui.searchClearLabel,
     zeroResults: ui.searchZeroResults,
     languageCode: locale.code,
   }}
 >
-  // pagefind-ui.js is loaded with `defer`, so per the HTML spec it has
-  // executed by the time DOMContentLoaded fires. We mount exactly once
-  // to avoid stacking duplicate widgets on the same element.
-  let mounted = false;
-  function mountPagefind() {
-    if (mounted) return;
-    if (typeof window.PagefindUI !== 'function') return;
-    mounted = true;
-    new window.PagefindUI({
-      element: '#search',
-      showImages: false,
-      showSubResults: true,
-      placeholder,
-      translations: {
-        placeholder,
-        clear_search: clearLabel,
-        zero_results: zeroResults,
-      },
-      // Restrict to the current page's language so a German page doesn't
-      // surface Spanish hits.
-      processResult: (result) => {
-        const lang = result && result.meta && result.meta.language;
-        if (
-          languageCode &&
-          lang &&
-          lang !== languageCode &&
-          lang.split('-')[0] !== languageCode.split('-')[0]
-        ) {
-          return null;
-        }
-        return result;
-      },
+  for (const shell of document.querySelectorAll('[data-search]')) {
+    const input = shell.querySelector('[data-search-input]');
+    const panel = shell.querySelector('[data-search-results]');
+    const message = shell.querySelector('[data-search-message]');
+    const list = shell.querySelector('[data-search-list]');
+    const template = shell.querySelector('[data-search-template]');
+
+    let pagefindPromise = null;
+    function loadPagefind() {
+      if (!pagefindPromise) {
+        // Vite would otherwise transform this string at build time; the
+        // /* @vite-ignore */ keeps the runtime URL intact.
+        pagefindPromise = import(/* @vite-ignore */ '/pagefind/pagefind.js')
+          .catch(() => null);
+      }
+      return pagefindPromise;
+    }
+
+    function langMatches(lang) {
+      if (!languageCode || !lang) return true;
+      if (lang === languageCode) return true;
+      return lang.split('-')[0] === languageCode.split('-')[0];
+    }
+
+    function showMessage(text) {
+      message.textContent = text;
+      message.hidden = false;
+      list.innerHTML = '';
+      panel.hidden = false;
+    }
+
+    function hidePanel() {
+      panel.hidden = true;
+      list.innerHTML = '';
+      message.textContent = '';
+    }
+
+    let token = 0;
+    async function runSearch() {
+      const term = input.value.trim();
+      const me = ++token;
+      if (!term) {
+        hidePanel();
+        return;
+      }
+      const pagefind = await loadPagefind();
+      if (me !== token) return;
+      if (!pagefind) {
+        hidePanel();
+        return;
+      }
+      const search = await pagefind.debouncedSearch(term, 200);
+      if (me !== token) return;
+      if (search === null) return;
+      if (search.results.length === 0) {
+        showMessage(zeroResults.replace('[SEARCH_TERM]', term));
+        return;
+      }
+      const datas = await Promise.all(
+        search.results.slice(0, 8).map((r) => r.data()),
+      );
+      if (me !== token) return;
+      const filtered = datas.filter((d) =>
+        langMatches(d && d.meta && d.meta.language),
+      );
+      if (filtered.length === 0) {
+        showMessage(zeroResults.replace('[SEARCH_TERM]', term));
+        return;
+      }
+      list.innerHTML = '';
+      for (const d of filtered) {
+        const node = template.content.cloneNode(true);
+        const a = node.querySelector('[data-link]');
+        a.href = d.url || d.raw_url || '#';
+        node.querySelector('[data-title]').textContent =
+          (d.meta && d.meta.title) || a.href;
+        // d.excerpt contains <mark> highlight spans — pass through as HTML.
+        node.querySelector('[data-excerpt]').innerHTML = d.excerpt || '';
+        list.appendChild(node);
+      }
+      message.hidden = true;
+      panel.hidden = false;
+    }
+
+    input.addEventListener('input', runSearch);
+    input.addEventListener('focus', runSearch);
+    document.addEventListener('click', (e) => {
+      if (!shell.contains(e.target)) hidePanel();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        hidePanel();
+        input.blur();
+      }
     });
   }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', mountPagefind, { once: true });
-  } else {
-    mountPagefind();
-  }
 </script>
-
-<style is:global>
-  /*
-   * Map Pagefind's CSS custom properties to the template's theme tokens
-   * so the search input visually belongs to the header.
-   */
-  .search-shell {
-    --pagefind-ui-primary: var(--color-accent, var(--accent, #3b82f6));
-    --pagefind-ui-text: var(--color-text);
-    --pagefind-ui-background: var(--color-surface);
-    --pagefind-ui-border: var(--color-border);
-    --pagefind-ui-tag: var(--color-surface-2);
-    --pagefind-ui-border-width: 1px;
-    /* Pill-shaped to match the language picker's rounded-full chrome. */
-    --pagefind-ui-border-radius: 9999px;
-    --pagefind-ui-font: inherit;
-  }
-
-  /*
-   * The result list is rendered inline below the input by default. Lift
-   * it out of the document flow so that typing doesn't shove the rest
-   * of the header content downward, and clamp its width so it doesn't
-   * overflow the viewport's right edge.
-   */
-  .search-shell .pagefind-ui__drawer {
-    position: absolute;
-    top: calc(100% + 0.5rem);
-    inset-inline-end: 0;
-    width: min(28rem, calc(100vw - 2rem));
-    max-height: min(70vh, 32rem);
-    overflow: auto;
-    margin: 0;
-    padding: 0.5rem;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: 0.75rem;
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
-    z-index: 50;
-  }
-  .search-shell .pagefind-ui__drawer:empty,
-  .search-shell .pagefind-ui__drawer.pagefind-ui__hidden {
-    display: none;
-  }
-
-  /*
-   * Match the language picker pill exactly: 2rem tall (text-sm with
-   * py-1.5 inside a 1px border), 0.875rem font, weight 500, px-3-style
-   * horizontal padding. The default Pagefind input is ~3rem tall with a
-   * 1rem 700-weight font, so every value below is an explicit override.
-   */
-  .search-shell .pagefind-ui__form {
-    margin: 0;
-    position: relative;
-  }
-  .search-shell .pagefind-ui__search-input {
-    box-sizing: border-box;
-    height: 2rem;
-    /* Room for the magnifier on the left and the Clear button on the right. */
-    padding-block: 0;
-    padding-inline-start: 1.875rem;
-    padding-inline-end: 2.5rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    line-height: 1.25;
-  }
-  /* Vertically centre the magnifier glyph inside the smaller pill. */
-  .search-shell .pagefind-ui__form::before {
-    width: 0.875rem;
-    height: 0.875rem;
-    background-size: 0.875rem;
-    top: 50%;
-    inset-inline-start: 0.625rem;
-    transform: translateY(-50%);
-  }
-  /* Clear button: same height as the input, smaller text, hugs the right edge. */
-  .search-shell .pagefind-ui__search-clear {
-    top: 50%;
-    transform: translateY(-50%);
-    inset-inline-end: 0.5rem;
-    height: 1.5rem;
-    padding: 0 0.5rem;
-    font-size: 0.75rem;
-    font-weight: 500;
-    line-height: 1;
-  }
-</style>
