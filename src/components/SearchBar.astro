@@ -11,18 +11,20 @@ const ui = uiStrings(locale.code);
 ---
 
 {/*
-  Pagefind UI mounts inside #search and is initialized once the script
-  loads. The stylesheet is also produced by `pagefind` at build time, so
-  in dev (where pagefind hasn't run yet) both URLs 404 silently and the
-  search bar is inert — the rest of the page renders fine.
+  Pagefind ships its own search UI as a self-contained module. We just
+  give it a mount point, mount once, and let it draw the input and the
+  result list itself. The wrapper is `position: relative` so the result
+  list can be positioned as a floating dropdown that doesn't expand the
+  sticky header when the user types.
+
+  In dev mode pagefind hasn't run yet, so /pagefind/* 404s and the
+  search box is silently inert — the rest of the page is unaffected.
 */}
 <link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
 
-<div
-  id="search"
-  data-pagefind-search
-  class="hidden md:block w-72 lg:w-80"
-></div>
+<div class="search-shell relative hidden md:block">
+  <div id="search" class="w-56 lg:w-64"></div>
+</div>
 
 <script src="/pagefind/pagefind-ui.js" is:inline defer></script>
 <script
@@ -34,32 +36,33 @@ const ui = uiStrings(locale.code);
     languageCode: locale.code,
   }}
 >
-  // Pagefind UI is a UMD bundle that exposes `window.PagefindUI`. We can
-  // safely re-use the same #search element across navigations because we
-  // only mount once per page load.
+  // pagefind-ui.js is loaded with `defer`, so per the HTML spec it has
+  // executed by the time DOMContentLoaded fires. We mount exactly once
+  // to avoid stacking duplicate widgets on the same element.
+  let mounted = false;
   function mountPagefind() {
+    if (mounted) return;
     if (typeof window.PagefindUI !== 'function') return;
+    mounted = true;
     new window.PagefindUI({
       element: '#search',
       showImages: false,
       showSubResults: true,
-      resetStyles: false,
       placeholder,
       translations: {
         placeholder,
         clear_search: clearLabel,
         zero_results: zeroResults,
       },
-      // Restrict results to the current page locale so visitors browsing
-      // the German site don't get Spanish hits.
-      mergeIndex: [],
+      // Restrict to the current page's language so a German page doesn't
+      // surface Spanish hits.
       processResult: (result) => {
+        const lang = result && result.meta && result.meta.language;
         if (
           languageCode &&
-          result.meta &&
-          result.meta.language &&
-          result.meta.language !== languageCode &&
-          !result.meta.language.startsWith(languageCode.split('-')[0])
+          lang &&
+          lang !== languageCode &&
+          lang.split('-')[0] !== languageCode.split('-')[0]
         ) {
           return null;
         }
@@ -68,46 +71,60 @@ const ui = uiStrings(locale.code);
     });
   }
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', mountPagefind);
+    document.addEventListener('DOMContentLoaded', mountPagefind, { once: true });
   } else {
     mountPagefind();
   }
-  // pagefind-ui.js is loaded with `defer`, so it may not be ready by the
-  // time the listener above fires — also try once it's actually present.
-  window.addEventListener('load', mountPagefind);
 </script>
 
 <style is:global>
-  /* Make Pagefind's default UI inherit the site's accent and surface
-     colours so the search box visually belongs to the header. */
-  #search {
+  /*
+   * Map Pagefind's CSS custom properties to the template's theme tokens
+   * so the search input visually belongs to the header.
+   */
+  .search-shell {
     --pagefind-ui-primary: var(--color-accent, var(--accent, #3b82f6));
     --pagefind-ui-text: var(--color-text);
     --pagefind-ui-background: var(--color-surface);
     --pagefind-ui-border: var(--color-border);
     --pagefind-ui-tag: var(--color-surface-2);
     --pagefind-ui-border-width: 1px;
-    --pagefind-ui-border-radius: 9999px;
+    --pagefind-ui-border-radius: 0.5rem;
     --pagefind-ui-font: inherit;
   }
-  #search .pagefind-ui__search-input {
-    height: 2.25rem;
-    padding-inline: 0.875rem 2.25rem;
-    font-size: 0.875rem;
-  }
-  /* The drawer with results: anchor it to the input and lift it above the
-     sticky header so it isn't clipped by the header's bottom border. */
-  #search .pagefind-ui__drawer {
+
+  /*
+   * The result list is rendered inline below the input by default. Lift
+   * it out of the document flow so that typing doesn't shove the rest
+   * of the header content downward, and clamp its width so it doesn't
+   * overflow the viewport's right edge.
+   */
+  .search-shell .pagefind-ui__drawer {
     position: absolute;
-    inset-inline-end: 0;
     top: calc(100% + 0.5rem);
-    width: min(28rem, 90vw);
-    max-height: 70vh;
+    inset-inline-end: 0;
+    width: min(28rem, calc(100vw - 2rem));
+    max-height: min(70vh, 32rem);
     overflow: auto;
-    border-radius: 1rem;
-    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.18);
+    margin: 0;
+    padding: 0.5rem;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
     z-index: 50;
+  }
+  .search-shell .pagefind-ui__drawer:empty,
+  .search-shell .pagefind-ui__drawer.pagefind-ui__hidden {
+    display: none;
+  }
+
+  /* Tighten the input row to fit the header's vertical rhythm. */
+  .search-shell .pagefind-ui__form {
+    margin: 0;
+  }
+  .search-shell .pagefind-ui__search-input {
+    height: 2.25rem;
+    font-size: 0.875rem;
   }
 </style>
