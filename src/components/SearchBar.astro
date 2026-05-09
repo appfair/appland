@@ -23,7 +23,7 @@ const ui = uiStrings(locale.code);
 <link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
 
 <div class="search-shell relative hidden md:block">
-  <div id="search" class="w-56 lg:w-64"></div>
+  <div id="search" class="w-40 lg:w-52"></div>
 </div>
 
 <script src="/pagefind/pagefind-ui.js" is:inline defer></script>
@@ -89,7 +89,8 @@ const ui = uiStrings(locale.code);
     --pagefind-ui-border: var(--color-border);
     --pagefind-ui-tag: var(--color-surface-2);
     --pagefind-ui-border-width: 1px;
-    --pagefind-ui-border-radius: 0.5rem;
+    /* Pill-shaped to match the language picker's rounded-full chrome. */
+    --pagefind-ui-border-radius: 9999px;
     --pagefind-ui-font: inherit;
   }
 
@@ -119,12 +120,27 @@ const ui = uiStrings(locale.code);
     display: none;
   }
 
-  /* Tighten the input row to fit the header's vertical rhythm. */
+  /* Match the language picker's footprint: 2rem tall, text-sm, pill chrome. */
   .search-shell .pagefind-ui__form {
     margin: 0;
   }
   .search-shell .pagefind-ui__search-input {
-    height: 2.25rem;
+    height: 2rem;
+    padding-block: 0;
     font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.25;
+  }
+  /* Pagefind's default magnifier-button is sized for a tall input; shrink
+     it so it sits cleanly inside the smaller pill. */
+  .search-shell .pagefind-ui__form::before {
+    width: 0.875rem;
+    height: 0.875rem;
+    background-size: 0.875rem;
+    top: 0.55rem;
+  }
+  .search-shell .pagefind-ui__search-clear {
+    padding-block: 0;
+    font-size: 0.75rem;
   }
 </style>
