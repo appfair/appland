@@ -20,7 +20,7 @@ const items = permissions.map((p, i) => ({ permission: p, svg: iconSvgs[i]! }));
 <section class="space-y-4">
   <header class="flex items-end justify-between gap-4">
     <h2 class="text-xl sm:text-2xl font-semibold tracking-tight">{i18n.heading}</h2>
-    <p class="text-xs uppercase tracking-wider text-[color:var(--color-text-muted)]">{view.displayName}</p>
+    <p class="text-xs uppercase tracking-wider text-[color:var(--color-text-muted)]" data-pagefind-ignore>{view.displayName}</p>
   </header>
 
   {permissions.length === 0 ? (
