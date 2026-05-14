@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import type { FaviconPaths, LocaleInfo, LocaleLink, SiteInfo } from '../lib/types.ts';
 import { pickText } from '../lib/i18n.ts';
+import { localeIndexHref } from '../lib/routes.ts';
 import LanguagePicker from '../components/LanguagePicker.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
 import SearchBar from '../components/SearchBar.astro';
@@ -48,7 +49,11 @@ const {
   autoRedirect = false,
 } = Astro.props;
 
-const path = pagePath ?? current.href;
+// LocaleInfo.href is built without the deployed base prefix (i18n.ts can't
+// safely read `import.meta.env.BASE_URL` because it's also imported from
+// the Node-side astro.config.mjs). Use the base-aware route helper here.
+const localeHomeHref = localeIndexHref(current.code);
+const path = pagePath ?? localeHomeHref;
 const canonical = new URL(path, site.host).toString();
 const accent = site.accentColor ?? '#3B82F6';
 
@@ -63,13 +68,24 @@ const alternates = localeLinks.map((l) => ({
   href: new URL(l.href, site.host).toString(),
 }));
 
+// Astro normalizes BASE_URL to a trailing slash. Empty/'/' for root-deployed
+// sites; '/Fair-Skies/' (etc.) for subpath/project-page deployments.
+const baseURL = import.meta.env.BASE_URL;
+
 // Payload for the auto-redirect script. The locales list is deliberately
-// the whole-site set; the inline script needs to be parser-friendly.
+// the whole-site set; the inline script needs to be parser-friendly. `base`
+// is included so the redirect target stays under the deployed subpath.
 const localeCodes = localeLinks.map((l) => l.code);
 const redirectPayload = JSON.stringify({
   locales: localeCodes,
   defaultLocale: current.code,
+  base: baseURL,
 });
+
+// Favicons come back from favicon.ts as root-relative paths
+// (`/_generated/favicons/…`); rebase them onto the deployed base so they
+// resolve under subpath deployments too.
+const faviconHref = (p: string) => baseURL + p.replace(/^\/+/, '');
 ---
 
 <!doctype html>
@@ -90,10 +106,10 @@ const redirectPayload = JSON.stringify({
 
     {favicons && (
       <>
-        <link rel="icon" type="image/png" href={favicons.icon} />
-        <link rel="apple-touch-icon" href={favicons.appleTouchIcon} />
-        <link rel="icon" sizes="192x192" href={favicons.pwaIcon192} />
-        <link rel="icon" sizes="512x512" href={favicons.pwaIcon512} />
+        <link rel="icon" type="image/png" href={faviconHref(favicons.icon)} />
+        <link rel="apple-touch-icon" href={faviconHref(favicons.appleTouchIcon)} />
+        <link rel="icon" sizes="192x192" href={faviconHref(favicons.pwaIcon192)} />
+        <link rel="icon" sizes="512x512" href={faviconHref(favicons.pwaIcon512)} />
       </>
     )}
 
@@ -103,7 +119,7 @@ const redirectPayload = JSON.stringify({
     <link
       rel="alternate"
       hreflang="x-default"
-      href={new URL('/', site.host).toString()}
+      href={new URL(baseURL, site.host).toString()}
     />
 
     <meta property="og:type" content="website" />
@@ -157,7 +173,8 @@ const redirectPayload = JSON.stringify({
             }
             if (target) {
               var loc = window.location;
-              loc.replace('/' + target + '/' + (loc.search || '') + (loc.hash || ''));
+              var base = cfg.base || '/';
+              loc.replace(base + target + '/' + (loc.search || '') + (loc.hash || ''));
             }
           } catch (_) { /* never block rendering */ }
         })();
@@ -187,7 +204,7 @@ const redirectPayload = JSON.stringify({
     >
       <div class="mx-auto max-w-6xl px-4 sm:px-6 py-3 flex items-center gap-3">
         <a
-          href={current.href}
+          href={localeHomeHref}
           class="font-semibold tracking-tight text-base sm:text-lg shrink-0"
         >{siteTitleText}</a>
         <div class="flex-1"></div>

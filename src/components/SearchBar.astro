@@ -73,6 +73,7 @@ const ui = uiStrings(locale.code);
   define:vars={{
     zeroResults: ui.searchZeroResults,
     languageCode: locale.code,
+    baseURL: import.meta.env.BASE_URL,
   }}
 >
   for (const shell of document.querySelectorAll('[data-search]')) {
@@ -87,7 +88,7 @@ const ui = uiStrings(locale.code);
       if (!pagefindPromise) {
         // Vite would otherwise transform this string at build time; the
         // /* @vite-ignore */ keeps the runtime URL intact.
-        pagefindPromise = import(/* @vite-ignore */ '/pagefind/pagefind.js')
+        pagefindPromise = import(/* @vite-ignore */ baseURL + 'pagefind/pagefind.js')
           .catch(() => null);
       }
       return pagefindPromise;

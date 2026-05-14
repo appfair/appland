@@ -9,6 +9,14 @@ const data = await loadSite();
 
 const localeCodes = data.locales.map((l) => l.code);
 
+// Split site.host into an origin (passed to `site`) and a pathname (passed
+// to `base`). Supports project-page deployments like
+// `https://example.github.io/Fair-Skies` where every route must be served
+// under `/Fair-Skies/...`. When the host has no path component, `base`
+// resolves to `'/'` and behavior is unchanged from before.
+const hostURL = new URL(data.site.host);
+const basePath = hostURL.pathname || '/';
+
 /**
  * Run Pagefind over the built `dist/` directory once Astro is done. Only
  * activated when siteinfo.yaml has `pagefind: true` — opted-out sites
@@ -37,6 +45,7 @@ function pagefindIntegration(enabled) {
 
 export default defineConfig({
   site: data.site.host,
+  base: basePath,
   trailingSlash: 'always',
   build: {
     format: 'directory',
